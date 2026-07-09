@@ -19,14 +19,22 @@ df: pandas DataFrame to analyze
 
 Generates a scatter plot where:
 
-- [ ] The x-axis represents row indices (DataFrame records)
-- [ ] The y-axis represents column names.
-- [ ] Y-tick labels are explicitly mapped to the DataFrame column names.
-- [ ] Each missing value is displayed as a vertical bar (|), using the default plotting color.
-- [ ] Displays the plot using Matplotlib
-- [ ] Returns: None
+- [x] The x-axis represents row indices (DataFrame records)
+- [x] The y-axis represents column names.
+- [x] Y-tick labels are explicitly mapped to the DataFrame column names.
+- [x] Each missing value is displayed as a vertical bar (|), using the default plotting color.
+- [x] Displays the plot using Matplotlib
+- [x] Returns: None
 
 NOTE: Your plot must be identical to the reference plot provided in the task.
 
 ## 2-convert_columns.py
 
+Write a function `def convert_columns(df):` that performs type conversion for specific columns:
+
+- [x] df: pandas DataFrame containing the columns TotalCharges and SeniorCitizen
+- [x] Converts the TotalCharges column to numeric.
+- [x] Non-numeric entries should be converted to NaN
+- [x] Maps the numeric values in the SeniorCitizen column (0 and 1) to categorical strings "No" and "Yes" respectively
+- [x] Returns: The modified DataFrame
+- [x] You are only allowed to use the following import: `import pandas as pd`.
