@@ -9,16 +9,16 @@ Handle missing values:
 
 def clean_total_charges(df, method='drop'):
     """Handles missings in total_charges field"""
+    # Create a copy so we do not mutate the caller's DataFrame in-place
+    df = df.copy()
 
     if method == 'drop':
         df = df.dropna(subset=['TotalCharges'])
-    else:
-        df['TotalCharges'] = pd.to_numeric(df['TotalCharges'], errors='coerce')
-        if method == 'median':
-            median_value = df['TotalCharges'].median()
-            df['TotalCharges'] = df['TotalCharges'].fillna(median_value)
-        if method == 'impute':
-            impute_charge = df['MonthlyCharges'] * df['tenure']
-            df['TotalCharges'] = df['TotalCharges'].fillna(impute_charge)
+    elif method == 'median':
+        median_value = df['TotalCharges'].median()
+        df['TotalCharges'] = df['TotalCharges'].fillna(median_value)
+    elif method == 'impute':
+        impute_charge = df['MonthlyCharges'] * df['tenure']
+        df['TotalCharges'] = df['TotalCharges'].fillna(impute_charge)
 
     return df
