@@ -41,3 +41,11 @@ Write a function `def convert_columns(df):` that performs type conversion for sp
 
 ## 3-clean_total_charges.py
 
+Write a function `def clean_total_charges(df, method='drop'):` that handles missing values in TotalCharges:
+
+- [x] df: pandas DataFrame with missing values in TotalCharges
+- [x] method: Strategy to handle missing values:
+- [x] 'drop': Remove rows with missing TotalCharges
+- [x] 'median': Fill with column median
+- [x] 'impute': Replace with MonthlyCharges * tenure
+- [x] Returns the modified DataFrame
