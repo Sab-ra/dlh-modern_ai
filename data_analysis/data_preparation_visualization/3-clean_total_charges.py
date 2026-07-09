@@ -12,12 +12,13 @@ def clean_total_charges(df, method='drop'):
 
     if method == 'drop':
         df = df.dropna(subset=['TotalCharges'])
-    if method == 'median':
+    else:
         df['TotalCharges'] = pd.to_numeric(df['TotalCharges'], errors='coerce')
-        median_value = df['TotalCharges'].median()
-        df['TotalCharges'] = df['TotalCharges'].fillna(median_value)
-    if method == 'impute':
-        impute_charge = df['MonthlyCharges'] * df['tenure']
-        df['TotalCharges'] = df['TotalCharges'].fillna(impute_charge)
+        if method == 'median':
+            median_value = df['TotalCharges'].median()
+            df['TotalCharges'] = df['TotalCharges'].fillna(median_value)
+        if method == 'impute':
+            impute_charge = df['MonthlyCharges'] * df['tenure']
+            df['TotalCharges'] = df['TotalCharges'].fillna(impute_charge)
 
     return df
