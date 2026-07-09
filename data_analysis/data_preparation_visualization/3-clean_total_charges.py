@@ -11,8 +11,6 @@ def clean_total_charges(df, method='drop'):
     """Handles missings in total_charges field"""
 
     # Prepare TotalCharges 
-    df['TotalCharges'] = df.to_numeric(df['TotalCharges'],
-                                       errors='coerce')
 
     # Error messages
     mver = 'Method shall be: "drop", "median", or "impute"'
@@ -20,6 +18,8 @@ def clean_total_charges(df, method='drop'):
     if method == 'drop':
         df = df.dropna(subset=['TotalCharges'])
     elif method == 'median':
+        df['TotalCharges'] = df.to_numeric(df['TotalCharges'],
+                                        errors='coerce')
         median_value = df['TotalCharges'].median()
         df['TotalCharges'] = df['TotalCharges'].fillna(median_value)
     elif method == 'impute':
