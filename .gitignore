@@ -22,6 +22,7 @@ env/
 # Jupyter
 # =========================
 .ipynb_checkpoints/
+*.ipynb
 
 # Jupyter runtime files
 .jupyter/
