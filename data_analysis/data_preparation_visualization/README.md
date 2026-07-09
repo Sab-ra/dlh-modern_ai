@@ -27,3 +27,6 @@ Generates a scatter plot where:
 - [ ] Returns: None
 
 NOTE: Your plot must be identical to the reference plot provided in the task.
+
+## 2-convert_columns.py
+
