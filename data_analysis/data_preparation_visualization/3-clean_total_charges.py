@@ -10,6 +10,10 @@ Handle missing values:
 def clean_total_charges(df, method='drop'):
     """Handles missings in total_charges field"""
 
+    # Prepare TotalCharges 
+    df['TotalCharges'] = df.to_numeric(df['TotalCharges'],
+                                       errors='coerce')
+
     # Error messages
     mver = 'Method shall be: "drop", "median", or "impute"'
 
