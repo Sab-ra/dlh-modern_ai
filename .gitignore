@@ -1,0 +1,97 @@
+# =========================
+# Python
+# =========================
+__pycache__/
+*.py[cod]
+*$py.class
+
+# Build artifacts
+build/
+dist/
+*.egg-info/
+.eggs/
+
+# =========================
+# Virtual environments
+# =========================
+venv/
+.venv/
+env/
+
+# =========================
+# Jupyter
+# =========================
+.ipynb_checkpoints/
+
+# Jupyter runtime files
+.jupyter/
+
+# =========================
+# Testing / Coverage
+# =========================
+.pytest_cache/
+.coverage
+coverage.xml
+htmlcov/
+
+# =========================
+# Linters / Type checkers
+# =========================
+.ruff_cache/
+.mypy_cache/
+
+# =========================
+# IDEs
+# =========================
+.vscode/*
+!.vscode/extensions.json
+!.vscode/settings.json
+
+.idea/
+
+# =========================
+# OS files
+# =========================
+.DS_Store
+.AppleDouble
+Thumbs.db
+
+# =========================
+# Environment / Secrets
+# =========================
+.env
+*.env
+
+# =========================
+# Logs
+# =========================
+*.log
+
+# =========================
+# ML / Data Science
+# =========================
+*.npy
+*.npz
+*.h5
+*.hdf5
+*.pkl
+*.joblib
+
+# Datasets
+datasets/
+data/
+
+# Or use project-specific paths instead:
+# pipeline/datasets/*.csv
+
+# =========================
+# Docker
+# =========================
+*.pid
+
+# =========================
+# Temporary files
+# =========================
+tmp/
+temp/
+`
