@@ -5,7 +5,6 @@ Handle missing values:
 - fill with columnd median
 - impute with calculated values
 """
-import pandas as pd
 
 
 def clean_total_charges(df, method='drop'):
