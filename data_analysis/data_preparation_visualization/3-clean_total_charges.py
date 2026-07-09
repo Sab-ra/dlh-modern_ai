@@ -13,15 +13,13 @@ def clean_total_charges(df, method='drop'):
     # Error messages
     mver = 'Method shall be: "drop", "median", or "impute"'
 
-    # Calculations
-    median_value = df['TotalCharges'].median()
-    impute_charge = df['MonthlyCharges'] * df['tenure']
-
     if method == 'drop':
         df = df.dropna(subset=['TotalCharges'])
     elif method == 'median':
+        median_value = df['TotalCharges'].median()
         df['TotalCharges'] = df['TotalCharges'].fillna(median_value)
     elif method == 'impute':
+        impute_charge = df['MonthlyCharges'] * df['tenure']
         df['TotalCharges'] = df['TotalCharges'].fillna(impute_charge)
     else:
         raise ValueError(mver)
