@@ -38,3 +38,6 @@ Write a function `def convert_columns(df):` that performs type conversion for sp
 - [x] Maps the numeric values in the SeniorCitizen column (0 and 1) to categorical strings "No" and "Yes" respectively
 - [x] Returns: The modified DataFrame
 - [x] You are only allowed to use the following import: `import pandas as pd`.
+
+## 3-clean_total_charges.py
+
