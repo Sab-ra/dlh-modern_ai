@@ -57,5 +57,11 @@ Write a function `def remove_duplicates(df):` that removes duplicate rows:
 - [x] df: pandas DataFrame to process
 - [x] Drops all duplicate rows
 - [x] Returns the deduplicated DataFrame
+
 ## 5-drop_customerID.py
 
+Write a function `def drop_customerID(df):` that removes the customerID column since unique identifiers lack predictive value:
+
+- [x] df: pandas DataFrame containing a customerID column
+- [x] Drops the customerID column
+- [x] Returns the modified DataFrame
