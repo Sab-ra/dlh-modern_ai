@@ -4,7 +4,7 @@ Drop useless columns
 """
 
 
-def drop_cusomerID(df):
+def drop_customerID(df):
     """drop()"""
 
     df = df.copy()
