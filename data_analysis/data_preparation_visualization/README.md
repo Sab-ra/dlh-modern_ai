@@ -49,3 +49,6 @@ Write a function `def clean_total_charges(df, method='drop'):` that handles miss
 - [x] 'median': Fill with column median
 - [x] 'impute': Replace with MonthlyCharges * tenure
 - [x] Returns the modified DataFrame
+
+## 4-remove_duplicates.py
+
