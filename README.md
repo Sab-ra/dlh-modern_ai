@@ -176,3 +176,6 @@ Defines the container image:
 - Runtime environment
 
 Together, `devcontainer.json`, `Dockerfile`, and `requirements.txt` create a reproducible machine-learning environment that works consistently on macOS, Linux, and Windows.
+
+## 5-drop_customerID.py
+
