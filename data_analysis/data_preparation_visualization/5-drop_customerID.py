@@ -7,4 +7,7 @@ Drop useless columns
 def drop_cusomerID(df):
     """drop()"""
 
-    return df.drop(columns=['customerID'])
+    df = df.copy()
+
+    df = df.drop(['customerID'], axis=1)
+    return df
