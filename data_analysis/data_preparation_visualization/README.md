@@ -52,3 +52,8 @@ Write a function `def clean_total_charges(df, method='drop'):` that handles miss
 
 ## 4-remove_duplicates.py
 
+Write a function `def remove_duplicates(df):` that removes duplicate rows:
+
+- [ ] df: pandas DataFrame to process
+- [ ] Drops all duplicate rows
+- [ ] Returns the deduplicated DataFrame
