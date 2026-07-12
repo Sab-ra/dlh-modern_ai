@@ -65,5 +65,14 @@ Write a function `def drop_customerID(df):` that removes the customerID column s
 - [x] df: pandas DataFrame containing a customerID column
 - [x] Drops the customerID column
 - [x] Returns the modified DataFrame
+
 ## 6-plot_churn_distribution.py
 
+Write a function `def plot_churn_distribution(df):` that visualizes churn class distribution:
+
+- [ ] df: pandas DataFrame with a Churn column
+- [ ] Generates a bar plot of Churn value counts
+- [ ] Uses colors: skyblue for ('No'), salmon for ('Yes')
+- [ ] Displays the plot
+- [ ] Returns: None
+- [ ] NOTE: Your plot must be identical to the reference plot provided in the task.
