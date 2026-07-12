@@ -65,3 +65,5 @@ Write a function `def drop_customerID(df):` that removes the customerID column s
 - [x] df: pandas DataFrame containing a customerID column
 - [x] Drops the customerID column
 - [x] Returns the modified DataFrame
+## 6-plot_churn_distribution.py
+
