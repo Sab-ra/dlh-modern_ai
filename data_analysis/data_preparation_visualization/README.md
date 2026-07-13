@@ -70,12 +70,22 @@ Write a function `def drop_customerID(df):` that removes the customerID column s
 
 Write a function `def plot_churn_distribution(df):` that visualizes churn class distribution:
 
-- [ ] df: pandas DataFrame with a Churn column
-- [ ] Generates a bar plot of Churn value counts
-- [ ] Uses colors: skyblue for ('No'), salmon for ('Yes')
-- [ ] Displays the plot
-- [ ] Returns: None
-- [ ] NOTE: Your plot must be identical to the reference plot provided in the task.
+- [x] df: pandas DataFrame with a Churn column
+- [x] Generates a bar plot of Churn value counts
+- [x] Uses colors: skyblue for ('No'), salmon for ('Yes')
+- [x] Displays the plot
+- [x] Returns: None
+- [x] NOTE: Your plot must be identical to the reference plot provided in the task.
 
 ## 7-plot_categorical_distributions.py
 
+Write a function `def plot_categorical_distributions(df, columns_to_plot=None):` that visualizes categorical feature distributions:
+
+- [ ] df: pandas DataFrame
+
+- [ ] columns_to_plot: Optional list of categorical columns (Default: all columns with dtype object, excluding the target variable Churn.)
+- [ ] Generates bar plots for each categorical feature in a grid layout
+- [ ] Rotates x-axis labels by 45°
+- [ ] Displays the plot
+- [ ] Returns: None
+- [ ] NOTE: Your plots must be identical to the reference plots provided in the task.
