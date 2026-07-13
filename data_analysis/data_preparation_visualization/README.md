@@ -76,3 +76,6 @@ Write a function `def plot_churn_distribution(df):` that visualizes churn class 
 - [ ] Displays the plot
 - [ ] Returns: None
 - [ ] NOTE: Your plot must be identical to the reference plot provided in the task.
+
+## 7-plot_categorical_distributions.py
+
