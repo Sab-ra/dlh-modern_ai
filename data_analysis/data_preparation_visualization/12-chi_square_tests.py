@@ -12,7 +12,8 @@ def chi_square_tests(df):
     Returns a dict: {feature_name: p_value}
     """
     p_values = {}
-    cat_cols = [c for c in df.select_dtypes(include='object').columns if c != 'Churn']
+    cat_cols = [c for c in df.select_dtypes(include='object'
+                                            ).columns if c != 'Churn']
 
     for col in cat_cols:
         contingency = pd.crosstab(df[col], df['Churn'])
