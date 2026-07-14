@@ -25,4 +25,5 @@ def plot_numeric_vs_churn(df, col):
     plt.xlabel(col)
     plt.legend(title='Churn')
 
+    plt.tight_layout()
     plt.show()
