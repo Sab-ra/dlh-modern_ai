@@ -127,3 +127,16 @@ _NOTE: Your plot must be identical to the reference plot provided in the task._
 
 ## 10-plot_categorical_vs_churn.py
 
+Write a function `def plot_categorical_vs_churn(df, col):` that visualizes churn rates per category:
+
+- [ ] df: pandas DataFrame with Churn column
+- [ ] col: Categorical column name
+- [ ] Uses a figure size of (12, 8)
+- [ ] Adds a title to the plot in the format: "Churn Rate by <col>"
+- [ ] Plots churn rate (Yes proportion) per category as a bar plot
+- [ ] Sets y-axis label to "Churn Rate"
+- [ ] Rotates the x-axis labels by 45°
+- [ ] Displays the plot
+- [ ] Returns: None
+
+_NOTE: Your plots must be identical to the reference plots provided in the task._
