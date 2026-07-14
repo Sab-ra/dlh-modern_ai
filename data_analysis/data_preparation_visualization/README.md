@@ -116,10 +116,11 @@ _NOTE: Your plots must be identical to the reference plots provided in the task.
 
 Write a function `def plot_correlation_heatmap(df):` that visualizes correlations between continuous numeric features using seaborn:
 
-- [ ] df: pandas DataFrame
-- [ ] Computes pairwise correlations
-- [ ] Generates an annotated heatmap with coolwarm colormap
-- [ ] Set vmin = -1 and vmax = 1 so that the heatmap color mapping reflects the full correlation range
-- [ ] Displays the plot
-- [ ] Returns: None
-NOTE: Your plot must be identical to the reference plot provided in the task.
+- [x] df: pandas DataFrame
+- [x] Computes pairwise correlations
+- [x] Generates an annotated heatmap with coolwarm colormap
+- [x] Set vmin = -1 and vmax = 1 so that the heatmap color mapping reflects the full correlation range
+- [x] Displays the plot
+- [x] Returns: None
+
+_NOTE: Your plot must be identical to the reference plot provided in the task._

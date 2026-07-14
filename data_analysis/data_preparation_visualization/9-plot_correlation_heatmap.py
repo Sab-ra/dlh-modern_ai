@@ -5,6 +5,7 @@ Corelation Map Module
 import seaborn as sns
 import matplotlib.pyplot as plt
 
+
 def plot_correlation_heatmap(df):
     """
     Compute pairwise correlation for numeric features
@@ -20,6 +21,4 @@ def plot_correlation_heatmap(df):
                 cmap='coolwarm'
                 )
     plt.title('Correlation Matrix')
-    plt.tight_layout()
     plt.show()
-
