@@ -141,19 +141,22 @@ Write a function `def plot_categorical_vs_churn(df, col):` that visualizes churn
 
 _NOTE: Your plots must be identical to the reference plots provided in the task._
 
-## n11-plot_numeric_vs_churn.py
+## 11-plot_numeric_vs_churn.py
 
 Write a function `def plot_numeric_vs_churn(df, col):` that compares continuous numeric feature distributions by churn:
 
-- [ ] df: pandas DataFrame with Churn column
-- [ ] col: Numeric column name
-- [ ] Uses a figure size of (12, 8)
-- [ ] Adds a title to the plot in the format: "<col> Distribution by Churn"
-- [ ] Plots overlapping histograms for Churn=Yes and Churn=No
-- [ ] Sets the x-axis label to "<col>"
-- [ ] Uses 30 bins to group the data along the x-axis
-- [ ] Adds a legend with a title
-- [ ] Displays the plot
-- [ ] Returns: None
+- [x] df: pandas DataFrame with Churn column
+- [x] col: Numeric column name
+- [x] Uses a figure size of (12, 8)
+- [x] Adds a title to the plot in the format: "<col> Distribution by Churn"
+- [x] Plots overlapping histograms for Churn=Yes and Churn=No
+- [x] Sets the x-axis label to "<col>"
+- [x] Uses 30 bins to group the data along the x-axis
+- [x] Adds a legend with a title
+- [x] Displays the plot
+- [x] Returns: None
 
 _NOTE: Your plot must be identical to the reference plot provided in the task._
+
+## 12-chi_square_tests.py
+
