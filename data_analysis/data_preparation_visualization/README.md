@@ -311,8 +311,11 @@ dtype: object
 
 Write a function `def scale_numeric(df):` that standardizes numeric columns:
 
-- [ ] df: pandas DataFrame
-- [ ] Scales MonthlyCharges and TotalCharges using StandardScaler (mean=0, std=1)
-- [ ] Returns the modified DataFrame
+- [x] df: pandas DataFrame
+- [x] Scales MonthlyCharges and TotalCharges using StandardScaler (mean=0, std=1)
+- [x] Returns the modified DataFrame
 
 _You are only allowed to use the following import: `from sklearn import preprocessing`_
+
+## 17-split_data.py
+
