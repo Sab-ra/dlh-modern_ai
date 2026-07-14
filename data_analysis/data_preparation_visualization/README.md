@@ -124,3 +124,6 @@ Write a function `def plot_correlation_heatmap(df):` that visualizes correlation
 - [x] Returns: None
 
 _NOTE: Your plot must be identical to the reference plot provided in the task._
+
+## 10-plot_categorical_vs_churn.py
+
