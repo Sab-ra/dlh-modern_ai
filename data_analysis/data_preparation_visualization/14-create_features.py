@@ -2,6 +2,7 @@
 """
 Generate new features for DF
 """
+import pandas as pd
 
 
 def create_features(df):
