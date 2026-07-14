@@ -218,3 +218,94 @@ Write a function `def encode_features(df):` that encodes features for modeling u
     - The Fitted OrdinalEncoder for TenureGroup
 
 _You are only allowed to use the following imports: `import pandas as pd`, `from sklearn import preprocessing`_
+
+### How checker will test:
+
+#### Main 1
+
+```python
+$ cat 15-main_0.py
+#!/usr/bin/env python3
+
+import pandas as pd
+create_features = __import__('14-create_features').create_features
+encode_features = __import__('15-encode_features').encode_features
+
+
+df = pd.read_csv('precleaned-Telco-Customer-Churn.csv')
+df.drop(columns=['gender', 'PhoneService'], inplace=True)
+df = create_features(df)
+df_enc, churn_le, binary_oe, tenure_oe = encode_features(df)
+
+pd.set_option('display.max_columns', None)
+print(df_enc.head())
+
+$ ./15-main_0.py
+   SeniorCitizen  Partner  Dependents  PaperlessBilling  MonthlyCharges  \
+0              0        1           0                 1           29.85
+1              0        0           0                 0           56.95
+2              0        0           0                 1           53.85
+3              0        0           0                 0           42.30
+4              0        0           0                 1           70.70
+
+   TotalCharges  Churn  NumServices  TenureGroup  Contract_One year  \
+0         29.85      0            2            0                  0
+1       1889.50      0            3            2                  1
+2        108.15      1            3            0                  0
+3       1840.75      0            4            2                  1
+4        151.65      1            1            0                  0
+
+   Contract_Two year  PaymentMethod_Credit card (automatic)  \
+0                  0                                      0
+1                  0                                      0
+2                  0                                      0
+3                  0                                      0
+4                  0                                      0
+
+   PaymentMethod_Electronic check  PaymentMethod_Mailed check
+0                               1                           0
+1                               0                           1
+2                               0                           1
+3                               0                           0
+4                               1                           0
+4                               1                           0
+```
+
+#### Main 2
+
+```python
+$ cat 15-main_1.py
+#!/usr/bin/env python3
+
+import pandas as pd
+create_features = __import__('14-create_features').create_features
+encode_features = __import__('15-encode_features').encode_features
+
+
+df = pd.read_csv('precleaned-Telco-Customer-Churn.csv')
+df.drop(columns=['gender', 'PhoneService'], inplace=True)
+df = create_features(df)
+df_enc, churn_le, binary_oe, tenure_oe = encode_features(df)
+
+print(df_enc.dtypes)
+
+$ ./15-main_1.py
+SeniorCitizen                              int64
+Partner                                    int64
+Dependents                                 int64
+PaperlessBilling                           int64
+MonthlyCharges                           float64
+TotalCharges                             float64
+Churn                                      int64
+NumServices                                int64
+TenureGroup                                int64
+Contract_One year                          int64
+Contract_Two year                          int64
+PaymentMethod_Credit card (automatic)      int64
+PaymentMethod_Electronic check             int64
+PaymentMethod_Mailed check                 int64
+dtype: object
+```
+
+## 16-scale_numeric.py
+
