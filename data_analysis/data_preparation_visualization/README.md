@@ -92,21 +92,21 @@ _NOTE: Your plots must be identical to the reference plots provided in the task.
 
 ## 8-plot_continuous_distributions.py
 
-Write a function def plot_continuous_distributions(df, columns_to_plot=None): that visualizes the distributions of continuous numerical features.
+Write a function `def plot_continuous_distributions(df, columns_to_plot=None):` that visualizes the distributions of continuous numerical features.
 
-- [ ] df: pandas DataFrame
-- [ ] columns_to_plot: Optional list of continuous numeric columns to plot. If None, it selects all numeric columns
-- [ ] For each selected column, generate:
-    - [ ] Left subplot: Histogram with KDE using the following settings:
-        - [ ] bins = 30
-        - [ ] density = True
-        - [ ] alpha = 0.7
-        - [ ] edgecolor = 'black'
-        - [ ] KDE line color should be red
-        - [ ] Title format: "<column_name> Histogram + KDE"
-    - [ ] Right subplot: Box Plot
-        - [ ] Title format: "<column_name> Boxplot"
-- [ ] Displays the plot
-- [ ] Returns: None
+- [x] df: pandas DataFrame
+- [x] columns_to_plot: Optional list of continuous numeric columns to plot. If None, it selects all numeric columns
+- [x] For each selected column, generate:
+    - [x] Left subplot: Histogram with KDE using the following settings:
+        - [x] bins = 30
+        - [x] density = True
+        - [x] alpha = 0.7
+        - [x] edgecolor = 'black'
+        - [x] KDE line color should be red
+        - [x] Title format: "<column_name> Histogram + KDE"
+    - [x] Right subplot: Box Plot
+        - [x] Title format: "<column_name> Boxplot"
+- [x] Displays the plot
+- [x] Returns: None
 
 _NOTE: Your plots must be identical to the reference plots provided in the task._
