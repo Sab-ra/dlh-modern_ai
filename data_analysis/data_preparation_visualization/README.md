@@ -81,14 +81,32 @@ Write a function `def plot_churn_distribution(df):` that visualizes churn class 
 
 Write a function `def plot_categorical_distributions(df, columns_to_plot=None):` that visualizes categorical feature distributions:
 
-- [ ] df: pandas DataFrame
+- [x] df: pandas DataFrame
+- [x] columns_to_plot: Optional list of categorical columns (Default: all columns with dtype object, excluding the target variable Churn.)
+- [x] Generates bar plots for each categorical feature in a grid layout
+- [x] Rotates x-axis labels by 45°
+- [x] Displays the plot
+- [x] Returns: None
 
-- [ ] columns_to_plot: Optional list of categorical columns (Default: all columns with dtype object, excluding the target variable Churn.)
-- [ ] Generates bar plots for each categorical feature in a grid layout
-- [ ] Rotates x-axis labels by 45°
-- [ ] Displays the plot
-- [ ] Returns: None
-- [ ] NOTE: Your plots must be identical to the reference plots provided in the task.
+_NOTE: Your plots must be identical to the reference plots provided in the task._
 
 ## 8-plot_continuous_distributions.py
 
+Write a function def plot_continuous_distributions(df, columns_to_plot=None): that visualizes the distributions of continuous numerical features.
+
+- [ ] df: pandas DataFrame
+- [ ] columns_to_plot: Optional list of continuous numeric columns to plot. If None, it selects all numeric columns
+- [ ] For each selected column, generate:
+    - [ ] Left subplot: Histogram with KDE using the following settings:
+        - [ ] bins = 30
+        - [ ] density = True
+        - [ ] alpha = 0.7
+        - [ ] edgecolor = 'black'
+        - [ ] KDE line color should be red
+        - [ ] Title format: "<column_name> Histogram + KDE"
+    - [ ] Right subplot: Box Plot
+        - [ ] Title format: "<column_name> Boxplot"
+- [ ] Displays the plot
+- [ ] Returns: None
+
+_NOTE: Your plots must be identical to the reference plots provided in the task._
