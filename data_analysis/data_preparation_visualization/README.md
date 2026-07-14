@@ -181,3 +181,21 @@ Write a function `def ttest_numeric(df):` that performs Welch's t-tests for cont
 Returns a dictionary: {feature_name: p_value}
 
 _You are only allowed to use the following import: `from scipy import stats`_
+
+## 14-create_features.py
+
+Write a function `def create_features(df):` that engineers new features from the dataset:
+
+**df: pandas DataFrame**
+
+- [ ] Creates:
+    - [ ] NumServices: Number of services the customer is subscribed to (counting only those with 'Yes' in selected service-related columns)
+        - [ ] Do not include the PhoneService column, as it was dropped based on the decision made in Task 12 (nph_df)
+        - [ ] For InternetService, count 'DSL' and 'Fiber optic' as 'Yes' (i.e., subscribed to the service), and 'No' as not subscribed
+    - [ ] TenureGroup: A categorical column that bins the tenure into intervals: 0-12, 13-24, 25-48, 49-60, 60+ , where 0 is excluded and upper bounds are inclusive.
+
+    - [ ] Drops the original columns that were used to create the new ones
+
+- [ ] Returns the modified DataFrame
+
+_You are only allowed to use the following import: `import pandas as pd`_
