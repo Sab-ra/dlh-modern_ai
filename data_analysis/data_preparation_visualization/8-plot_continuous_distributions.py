@@ -6,6 +6,7 @@ import matplotlib.pyplot as plt
 import numpy as np
 from scipy import stats
 
+
 def plot_continuous_distributions(df, columns_to_plot=None):
     """
     Visualise distribution of numerical fields
