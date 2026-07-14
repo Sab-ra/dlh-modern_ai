@@ -13,6 +13,7 @@ Even if a file matching .gitignore is currently open in the editor or attached t
 ## Plotting and Visualization Style
 
 Always use direct Matplotlib axis/plot functions (e.g., ax.hist(), ax.plot()) instead of pandas wrapper functions (e.g., df.plot(kind='hist')). General pandas plotting wrappers introduce unwanted defaults and legends that fail strict image-matching checks.
+Use plt.tight_layout() only when there are few graphs, that may need it. Otherwise applied to a single graph, it causes checker to not accetp the task.
 
 ## Consider as Valuable
 
