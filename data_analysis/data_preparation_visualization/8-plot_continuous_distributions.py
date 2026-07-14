@@ -4,7 +4,7 @@ Module bar+KDE, and boxplot for numbers
 """
 import matplotlib.pyplot as plt
 import numpy as np
-from scipy.stats import gaussian_kde
+from scipy import stats
 
 
 def plot_continuous_distributions(df, columns_to_plot=None):
@@ -34,7 +34,7 @@ def plot_continuous_distributions(df, columns_to_plot=None):
                      alpha=0.7,
                      edgecolor='black',
                      )
-        kde = gaussian_kde(data)
+        kde = stats.gaussian_kde(data)
         x_vals = np.linspace(data.min(),
                              data.max(),
                              200
