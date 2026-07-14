@@ -202,3 +202,19 @@ _You are only allowed to use the following import: `import pandas as pd`_
 
 ## 15-encode_features.py
 
+Write a function `def encode_features(df):` that encodes features for modeling using Scikit-learn:
+
+- [x] df: pandas DataFrame
+- [x] lines of code in the function shall not be more than 79 characters
+- [x] The function should encode:
+    - Churn: LabelEncoder (No→0, Yes→1)
+    - Partner, Dependents, PaperlessBilling, SeniorCitizen: OrdinalEncoder (No→0, Yes→1)
+    - Contract, PaymentMethod: One-hot encoding with drop first set to True
+    - TenureGroup: Alphabetical order OrdinalEncoder
+- [x] Returns:
+    - The encoded DataFrame
+    - The Fitted LabelEncoder for Churn
+    - The Fitted OrdinalEncoder for binary columns
+    - The Fitted OrdinalEncoder for TenureGroup
+
+_You are only allowed to use the following imports: `import pandas as pd`, `from sklearn import preprocessing`_
