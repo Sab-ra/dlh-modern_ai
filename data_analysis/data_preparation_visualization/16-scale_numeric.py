@@ -7,7 +7,7 @@ from sklearn import preprocessing
 
 def scale_numeric(df):
     """
-    Acheave: mean - 0 and \sigma^2 - 1
+    Acheave: mean - 0 and stdiv - 1
     """
 
     df = df.copy()
