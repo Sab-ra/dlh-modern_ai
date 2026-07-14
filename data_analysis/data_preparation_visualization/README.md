@@ -319,3 +319,13 @@ _You are only allowed to use the following import: `from sklearn import preproce
 
 ## 17-split_data.py
 
+Write a function `def split_data(df, target='Churn', test_size=0.2, random_state=42):` that splits data into train/test sets:
+
+- [x] df: pandas DataFrame
+- [x] target: Name of target column
+- [x] test_size: Proportion for test split
+- [x] random_state: Random seed
+- [x] Uses stratified sampling to preserve class distribution
+- [x] Returns: (X_train, X_test, y_train, y_test)
+
+_You are only allowed to use the following import: `from sklearn import model_selection`_
