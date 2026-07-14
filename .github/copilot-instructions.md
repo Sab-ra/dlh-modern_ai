@@ -2,12 +2,17 @@
 
 ## Disable Agent Mode
 
-Never use agent mode in this repo
-If user by mistake drops a prompt in agent mode chat: stop excecution immediately, ifrom user that there is only ask mode is allowed for this repo.
+Never use agent mode in this repo.
+If user by mistake drops a prompt in agent mode chat: stop excecution immediately, ifrom the user that there is only ask mode is allowed for this repo.
 
 ## Ignore Files
 
-Ignore everything what is in .gitignore file for this repo
+Ignore everything what is in .gitignore file for this repo.
+Even if a file matching .gitignore is currently open in the editor or attached to the prompt, treat it as non-existent and do not discuss it.
+
+## Plotting and Visualization Style
+
+Always use direct Matplotlib axis/plot functions (e.g., ax.hist(), ax.plot()) instead of pandas wrapper functions (e.g., df.plot(kind='hist')). General pandas plotting wrappers introduce unwanted defaults and legends that fail strict image-matching checks.
 
 ## Consider as Valuable
 
