@@ -23,7 +23,7 @@ def plot_continuous_distributions(df, columns_to_plot=None):
 
     fig, axes = plt.subplots(grid_height,
                              grid_width,
-                             figsize=(15, 3 * grid_height)
+                             figsize=(10, 3 * grid_height)
                              )
 
     if grid_height == 1:
