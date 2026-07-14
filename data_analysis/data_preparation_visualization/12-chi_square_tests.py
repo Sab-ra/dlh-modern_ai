@@ -8,7 +8,8 @@ from scipy import stats
 
 def chi_square_tests(df):
     """
-    Compute chi-square p-values between each categorical feature and Churn.
+    Compute chi-square p-values between each
+    categorical feature and Churn.
     Returns a dict: {feature_name: p_value}
     """
     p_values = {}

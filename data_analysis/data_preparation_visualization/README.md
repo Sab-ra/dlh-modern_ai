@@ -160,3 +160,24 @@ _NOTE: Your plot must be identical to the reference plot provided in the task._
 
 ## 12-chi_square_tests.py
 
+Write a function `def chi_square_tests(df):` that performs chi-square tests for categorical features, using SciPy:
+
+- [x] df: pandas DataFrame with Churn and categorical columns
+- [x] Computes the Chi-square p-value to test the independence between each categorical feature and the target variable Churn, excluding Churn itself from the features tested.
+- [x] Returns a dictionary: {feature_name: p_value}
+- [x] You are only allowed to use the following imports: `import pandas as pd`, `from scipy import stats`
+
+## 13-ttest_numeric.py
+
+Write a function `def ttest_numeric(df):` that performs Welch's t-tests for continuous numeric features using scipy:
+
+- [x] df: pandas DataFrame with Churn column
+- [x] Computes t-test p-value comparing Churn=Yes vs Churn=No for each numeric feature
+
+**The Hypothesis being tested is:**
+
+- H₀ (null): The means of the variable are equal in Churn=Yes and Churn=No groups
+- H₁ (alternative): The means differ significantly
+Returns a dictionary: {feature_name: p_value}
+
+_You are only allowed to use the following import: `from scipy import stats`_
