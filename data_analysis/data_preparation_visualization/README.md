@@ -140,3 +140,5 @@ Write a function `def plot_categorical_vs_churn(df, col):` that visualizes churn
 - [x] Returns: None
 
 _NOTE: Your plots must be identical to the reference plots provided in the task._
+\## n11-plot_numeric_vs_churn.py
+
