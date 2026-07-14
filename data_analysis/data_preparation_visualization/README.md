@@ -89,3 +89,6 @@ Write a function `def plot_categorical_distributions(df, columns_to_plot=None):`
 - [ ] Displays the plot
 - [ ] Returns: None
 - [ ] NOTE: Your plots must be identical to the reference plots provided in the task.
+
+## 8-plot_continuous_distributions.py
+
