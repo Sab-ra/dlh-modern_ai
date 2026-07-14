@@ -12,18 +12,15 @@ def plot_numeric_vs_churn(df, col):
 
     plt.figure(figsize=(12, 8))
 
-    sit_puts = df[df['Churn'] == 'No'][col].dropna()
-    fuc_offs = df[df['Churn'] == 'Yes'][col].dropna()
+    sit_puts = df[df['Churn'] == 'No'][col]
+    fuc_offs = df[df['Churn'] == 'Yes'][col]
 
     plt.hist([sit_puts, fuc_offs],
               bins=30,
               label=['No', 'Yes'])
-    plt.hist([sit_puts, fuc_offs],
-              bins=30,
-              label=['No', 'Yes'])
+
     plt.title(f'{col} Distribution by Churn')
-    plt.xlabel(col)
+    plt.xlabel(f'{col}')
     plt.legend(title='Churn')
 
-    plt.tight_layout()
     plt.show()
