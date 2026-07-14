@@ -309,3 +309,10 @@ dtype: object
 
 ## 16-scale_numeric.py
 
+Write a function `def scale_numeric(df):` that standardizes numeric columns:
+
+- [ ] df: pandas DataFrame
+- [ ] Scales MonthlyCharges and TotalCharges using StandardScaler (mean=0, std=1)
+- [ ] Returns the modified DataFrame
+
+_You are only allowed to use the following import: `from sklearn import preprocessing`_
