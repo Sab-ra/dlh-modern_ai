@@ -24,7 +24,9 @@ def create_features(df):
 
     num_services = (df[existing_service_cols] == 'Yes').sum(axis=1)
     if 'InternetService' in df.columns:
-        num_services += df['InternetService'].isin(['DSL', 'Fiber optic']).astype(int)
+        num_services += df['InternetService'
+                           ].isin(['DSL', 'Fiber optic']
+                                  ).astype(int)
 
     df['NumServices'] = num_services
 
