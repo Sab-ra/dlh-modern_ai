@@ -1,42 +1,40 @@
 #!/usr/bin/env python3
-"""
-Encode features for modelling
-"""
+"""This module provides functions for cleaning
+and preprocessing dataset features."""
 import pandas as pd
 from sklearn import preprocessing
 
 
 def encode_features(df):
-    """
-    DF-specific encoding features function
-    """
-    df = df.copy()
+    """Encode dataset features using LabelEncoder for 'Churn',
+    OrdinalEncoder for binary columns and 'TenureGroup',
+    and One-Hot encoding for nominal features."""
+    # Turn Churn (No/Yes) into 0/1, this is the target column
+    le = preprocessing.LabelEncoder()
+    df['Churn'] = le.fit_transform(df['Churn'])
 
-    churn_le = preprocessing.LabelEncoder()
-    df['Churn'] = churn_le.fit_transform(df['Churn']).astype(int)
+    # Turn these Yes/No feature columns into 0/1 too
+    ordinal_cols = ["Partner", "Dependents",
+                    "PaperlessBilling", "SeniorCitizen"]
+    oe = preprocessing.OrdinalEncoder(
+        categories=[['No', 'Yes']])
+    for col in ordinal_cols:
+        df[[col]] = oe.fit_transform(df[[col]]).astype(int)
 
-    binary_cols = [
-        'Partner',
-        'Dependents',
-        'PaperlessBilling',
-        'SeniorCitizen'
-    ]
-    binary_oe = preprocessing.OrdinalEncoder(
-        categories=[['No', 'Yes']] * len(binary_cols)
-    )
-    df[binary_cols] = binary_oe.fit_transform(df[binary_cols]).astype(int)
+    # TenureGroup gets its own encoder, alphabetical order by default
+    tenure_oe = preprocessing.OrdinalEncoder()
+    df[['TenureGroup']] = tenure_oe.fit_transform(
+        df[['TenureGroup']]).astype(int)
 
-    tenure_oe = preprocessing.OrdinalEncoder(
-        categories=[['0-12', '13-24', '25-48', '49-60', '60+']]
-    )
-    df[['TenureGroup']] = tenure_oe.fit_transform(df[['TenureGroup']])
-    df['TenureGroup'] = df['TenureGroup'].astype(int)
+    # Contract and PaymentMethod have no real order, so one-hot
+    # instead, drop first to avoid redundant columns
+    ohe = preprocessing.OneHotEncoder(drop='first', sparse_output=False)
+    ohe_cols = ["Contract", "PaymentMethod"]
+    encoded = ohe.fit_transform(df[ohe_cols])
 
-    df = pd.get_dummies(
-        df,
-        columns=['Contract', 'PaymentMethod'],
-        drop_first=True,
-        dtype=int
-    )
+    # New columns come with auto-generated names, add them in
+    df[ohe.get_feature_names_out(ohe_cols)] = encoded
+    # Then remove the original text columns, already encoded now
+    df = df.drop(columns=ohe_cols)
 
-    return df, churn_le, binary_oe, tenure_oe
+    return df, le, oe, tenure_oe
