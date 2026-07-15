@@ -48,24 +48,21 @@ def scroll_and_scrape(url, scroll_pause=0.2):
             time.sleep(scroll_pause)
 
         raw_products = driver.execute_script(
-            """
-            const cards = Array.from(document.querySelectorAll('div.thumbnail'));
-            return cards.map((card) => {
-                const t = card.querySelector('a.title');
-                const p = card.querySelector('h4.price');
-                const d = card.querySelector('p.description');
-                const stars = card.querySelectorAll(
-                    '.ratings .ws-icon-star, .ratings .glyphicon-star'
-                ).length;
-                return {
-                    title: t ? (t.getAttribute('title') || t.textContent).trim()
-                             : '',
-                    price: p ? p.textContent.trim() : '',
-                    description: d ? d.textContent.trim() : '',
-                    rating: stars
-                };
-            });
-            """
+            "const q='div.thumbnail';"
+            "const cards=Array.from(document.querySelectorAll(q));"
+            "return cards.map((card)=>{"
+            "const t=card.querySelector('a.title');"
+            "const p=card.querySelector('h4.price');"
+            "const d=card.querySelector('p.description');"
+            "const s1='.ratings .ws-icon-star';"
+            "const s2='.ratings .glyphicon-star';"
+            "const stars=card.querySelectorAll(s1+', '+s2).length;"
+            "const title=t?(t.getAttribute('title')||t.textContent).trim():'';"
+            "const price=p?p.textContent.trim():'';"
+            "const description=d?d.textContent.trim():'';"
+            "return {title:title,price:price,description:description,"
+            "rating:stars};"
+            "});"
         )
 
         products = []
