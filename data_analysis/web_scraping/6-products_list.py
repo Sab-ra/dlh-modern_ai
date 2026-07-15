@@ -1,14 +1,14 @@
 #!/usr/bin/env python3
 """
-Scrape product cards from a JS-rendered page with Selenium.
+Scrape products from a JS-rendered page with Selenium.
 """
 import time
 from selenium import webdriver
 
 
-def scrape_products(url):
+def scrape_products_list(url):
     """
-    Open page, wait for products, and return normalized product records.
+    Open page, wait for product cards, and return normalized product records.
     """
     options = webdriver.ChromeOptions()
     options.add_argument("--headless")
@@ -20,50 +20,61 @@ def scrape_products(url):
     try:
         driver.get(url)
 
-        js = """
-const selectors = ['.product', '.product-card', '.card'];
-let cards = [];
-for (const s of selectors) {
-  cards = Array.from(document.querySelectorAll(s));
-  if (cards.length) break;
-}
-return cards.map((card) => {
-  const t = card.querySelector('h2, h3, .title, .product-title');
-  const p = card.querySelector('.price, .product-price, [data-price]');
-  const a = card.querySelector('a[href]');
-  return {
-    title: t ? t.textContent.trim() : '',
-    price: p ? p.textContent.trim() : '',
-    url: a ? a.href : ''
-  };
-});
-"""
-
-        items = []
+        cards = []
         start = time.time()
         while time.time() - start < 10:
-            items = driver.execute_script(js)
-            if items:
+            cards = driver.find_elements("css selector", ".thumbnail")
+            if cards:
                 break
             time.sleep(0.25)
 
-        normalized = []
-        for item in items:
-            normalized.append(
+        products = []
+        for card in cards:
+            title = ""
+            price = ""
+            description = ""
+            rating = 0
+
+            title_el = card.find_elements("css selector", "a.title")
+            if title_el:
+                title = title_el[0].text.strip()
+
+            price_el = card.find_elements("css selector", "h4.price")
+            if price_el:
+                price = price_el[0].text.strip()
+
+            desc_el = card.find_elements("css selector", "p.description")
+            if desc_el:
+                description = desc_el[0].text.strip()
+
+            stars = card.find_elements(
+                "css selector", ".ratings .glyphicon-star"
+            )
+            rating = len(stars)
+
+            products.append(
                 {
-                    "title": str(item.get("title", "")),
-                    "price": str(item.get("price", "")),
-                    "url": str(item.get("url", "")),
+                    "title": str(title),
+                    "price": str(price),
+                    "description": str(description),
+                    "rating": int(rating),
                 }
             )
 
-        return normalized
+        return products
     finally:
         driver.quit()
 
 
+def scrape_products(url):
+    """
+    Backward-compatible wrapper.
+    """
+    return scrape_products_list(url)
+
+
 def products_list(url):
     """
-    Keep backward compatibility with older function name.
+    Backward-compatible wrapper.
     """
-    return scrape_products(url)
+    return scrape_products_list(url)
