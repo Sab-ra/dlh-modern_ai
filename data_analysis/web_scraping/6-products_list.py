@@ -8,7 +8,7 @@ from selenium import webdriver
 
 def scrape_products_list(url):
     """
-    Open page, wait for product cards, and return normalized product records.
+    Open the page, wait for cards, and return product records.
     """
     options = webdriver.ChromeOptions()
     options.add_argument("--headless")
@@ -47,10 +47,23 @@ def scrape_products_list(url):
             if desc_el:
                 description = desc_el[0].text.strip()
 
-            stars = card.find_elements(
-                "css selector", ".ratings .glyphicon-star"
-            )
-            rating = len(stars)
+            rating_el = card.find_elements("css selector", "p[data-rating]")
+            if rating_el:
+                raw_rating = rating_el[0].get_attribute("data-rating") or "0"
+                if raw_rating.isdigit():
+                    rating = int(raw_rating)
+
+            if rating == 0:
+                stars = card.find_elements(
+                    "css selector",
+                    ".ws-icon-star, .glyphicon-star",
+                )
+                if not stars:
+                    stars = card.find_elements(
+                        "css selector",
+                        ".ratings span",
+                    )
+                rating = len(stars)
 
             products.append(
                 {
