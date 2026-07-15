@@ -1,14 +1,14 @@
 #!/usr/bin/env python3
 """
-Scroll a dynamic products page and return unique product records.
+Scroll a dynamic products page and scrape unique products with Selenium.
 """
 import time
 from selenium import webdriver
 
 
-def scroll_and_scrape(url, scroll_pause=0.4):
+def scroll_and_scrape(url, scroll_pause=0.2):
     """
-    Scroll until product count stabilizes, then scrape unique products.
+    Scroll until loaded cards stabilize, then return unique product records.
     """
     options = webdriver.ChromeOptions()
     options.add_argument("--headless")
@@ -21,23 +21,20 @@ def scroll_and_scrape(url, scroll_pause=0.4):
     try:
         driver.get(url)
 
-        max_wait = 20.0
-        max_steps = 70
         stable_rounds = 0
         last_count = 0
-        start_time = time.time()
+        start = time.time()
+        max_wait = 14.0
+        max_steps = 120
 
         for _ in range(max_steps):
-            if time.time() - start_time > max_wait:
+            if time.time() - start > max_wait:
                 break
 
-            driver.execute_script(
+            current_count = driver.execute_script(
                 "window.scrollTo(0, document.body.scrollHeight);"
+                "return document.querySelectorAll('div.thumbnail').length;"
             )
-            time.sleep(scroll_pause)
-
-            cards = driver.find_elements("css selector", "div.thumbnail")
-            current_count = len(cards)
 
             if current_count == last_count:
                 stable_rounds += 1
@@ -48,49 +45,49 @@ def scroll_and_scrape(url, scroll_pause=0.4):
             if stable_rounds >= 10:
                 break
 
-        time.sleep(0.6)
-        cards = driver.find_elements("css selector", "div.thumbnail")
+            time.sleep(scroll_pause)
+
+        raw_products = driver.execute_script(
+            """
+            const cards = Array.from(document.querySelectorAll('div.thumbnail'));
+            return cards.map((card) => {
+                const t = card.querySelector('a.title');
+                const p = card.querySelector('h4.price');
+                const d = card.querySelector('p.description');
+                const stars = card.querySelectorAll(
+                    '.ratings .ws-icon-star, .ratings .glyphicon-star'
+                ).length;
+                return {
+                    title: t ? (t.getAttribute('title') || t.textContent).trim()
+                             : '',
+                    price: p ? p.textContent.trim() : '',
+                    description: d ? d.textContent.trim() : '',
+                    rating: stars
+                };
+            });
+            """
+        )
 
         products = []
         seen = set()
 
-        for card in cards:
-            title = ""
-            price = ""
-            description = ""
-            rating = 0
+        for item in raw_products:
+            title = str(item.get("title", ""))
+            price = str(item.get("price", ""))
+            description = str(item.get("description", ""))
+            rating = int(item.get("rating", 0))
 
-            title_el = card.find_elements("css selector", "a.title")
-            if title_el:
-                title = title_el[0].get_attribute("title") or ""
-                if not title:
-                    title = title_el[0].text.strip()
-
-            price_el = card.find_elements("css selector", "h4.price")
-            if price_el:
-                price = price_el[0].text.strip()
-
-            desc_el = card.find_elements("css selector", "p.description")
-            if desc_el:
-                description = desc_el[0].text.strip()
-
-            stars = card.find_elements(
-                "css selector",
-                ".ratings .ws-icon-star, .ratings .glyphicon-star",
-            )
-            rating = len(stars)
-
-            key = (str(title), str(price))
+            key = (title, price)
             if key in seen:
                 continue
             seen.add(key)
 
             products.append(
                 {
-                    "title": str(title),
-                    "price": str(price),
-                    "description": str(description),
-                    "rating": int(rating),
+                    "title": title,
+                    "price": price,
+                    "description": description,
+                    "rating": rating,
                 }
             )
 
