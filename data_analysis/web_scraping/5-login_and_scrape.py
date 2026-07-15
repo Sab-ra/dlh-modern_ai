@@ -16,7 +16,7 @@ def login_and_scrape(login_url, user, pwd):
 
         soup = BeautifulSoup(get_resp.text, "html.parser")
         token_input = soup.find("input", attrs={"name": "csrf_token"})
-        csrf_token = token_input.get("value", "") if token_input else ""
+        csrf_token = token_input["value"]
 
         payload = {
             "username": user,
