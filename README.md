@@ -179,3 +179,6 @@ Together, `devcontainer.json`, `Dockerfile`, and `requirements.txt` create a rep
 
 ## 5-drop_customerID.py
 
+
+## 5-login_and_scrape.py
+
