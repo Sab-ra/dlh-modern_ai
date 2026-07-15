@@ -19,12 +19,12 @@ def scrape_paginated(base_url):
 
         for quote in soup.find_all("div", class_="quote"):
             text_tag = quote.find("span", class_="text")
-            author_tag = quote.find("small", class_="author")
+            athr_tag = quote.find("small", class_="author")
             tag_links = quote.select("div.tags a.tag")
 
             all_quotes.append({
                 "text": text_tag.get_text(strip=True) if text_tag else "",
-                "author": author_tag.get_text(strip=True) if author_tag else "",
+                "author": athr_tag.get_text(strip=True) if athr_tag else "",
                 "tags": [tag.get_text(strip=True) for tag in tag_links],
             })
 
