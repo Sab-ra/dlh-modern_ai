@@ -39,11 +39,19 @@ def scrape_product_detail(url, delay=2.0):
         if desc_nodes:
             description = desc_nodes[0].text.strip()
 
-        stars = driver.find_elements(
-            "css selector",
-            ".ratings p.ws-icon.ws-icon-star",
-        )
-        rating = len(stars)
+        stars = []
+        rating_nodes = driver.find_elements("css selector", "p[data-rating]")
+        if rating_nodes:
+            raw_rating = rating_nodes[0].get_attribute("data-rating") or "0"
+            if raw_rating.isdigit():
+                rating = int(raw_rating)
+
+        if rating == 0:
+            stars = driver.find_elements(
+                "css selector",
+                ".ratings .glyphicon-star",
+            )
+            rating = len(stars)
 
         return {
             "title": str(title),
