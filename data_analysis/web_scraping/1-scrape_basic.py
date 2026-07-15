@@ -9,8 +9,8 @@ def scrape_basic(url):
     """
     Next step after fetching HTML
     """
-    fetch_html = __import__("0-fetch_html").fetch_html
 
+    fetch_html = __import__('0-fetch_html').fetch_html
     html = fetch_html(url)
     soup = BeautifulSoup(html, "html.parser")
 
