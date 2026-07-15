@@ -38,3 +38,6 @@ Write a function `def scrape_paginated(base_url):` that follows “Next” links
 - [ ] Returns: the full list of quote dicts (same format as Task 1)
 
 _Imports: `from bs4 import BeautifulSoup`, `import time`, `from urllib import parse`, `fetch_html = __import__('0-fetch_html').fetch_html and scrape_basic = __import__('1-scrape_basic').scrape_basic`_
+
+## 3-scrape_via_api.py
+
