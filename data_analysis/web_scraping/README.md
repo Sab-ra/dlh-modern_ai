@@ -56,3 +56,15 @@ _Imports: `import json` and `fetch_html = __import__('0-fetch_html').fetch_html`
 
 ## 4-extract_jsonld.py
 
+Write a function `def extract_jsonld(url):` that pulls quotes from embedded JSON‑LD on a page:
+
+- [x] url is the Quotes List endpoint (e.g. "https://quotes.toscrape.com/")
+- [x] Use fetch_html() to fetch the HTML
+- [x] Locate all `<script type="application/ld+json">` blocks and parse each with `json.loads()`
+- [x] From each JSON‑LD object of "@type": "Quote", extract:
+- [x] "text": the quote text (.get("text"))
+- [x] "author": the author’s name (.get("author", {}).get("name"))
+- [x] "tags": keywords, (p.s. split into a list if provided as a comma-separated string)
+- [x] Return: a list of quote dicts, each with keys "text", "author", and "tags"
+
+_Imports: `import json`, `from bs4 import BeautifulSoup` and `fetch_html = __import__('0-fetch_html').fetch_html`_
