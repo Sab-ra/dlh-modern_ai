@@ -6,7 +6,7 @@ import time
 from selenium import webdriver
 
 
-def products_list(url):
+def scrape_products(url):
     """
     Open the page, wait for product cards, and return product data.
     """
@@ -61,3 +61,10 @@ def products_list(url):
         return items
     finally:
         driver.quit()
+
+
+def products_list(url):
+    """
+    Backward-compatible wrapper for the previous function name.
+    """
+    return scrape_products(url)
