@@ -1,14 +1,14 @@
 #!/usr/bin/env python3
 """
-Scroll an infinite page and scrape unique product cards with Selenium.
+Scroll a dynamic products page and return unique product records.
 """
 import time
 from selenium import webdriver
 
 
-def scroll_and_scrape(url, scroll_pause=0.35):
+def scroll_and_scrape(url, scroll_pause=0.4):
     """
-    Scroll with strict time limits, then return unique product records.
+    Scroll until product count stabilizes, then scrape unique products.
     """
     options = webdriver.ChromeOptions()
     options.add_argument("--headless")
@@ -21,23 +21,13 @@ def scroll_and_scrape(url, scroll_pause=0.35):
     try:
         driver.get(url)
 
+        max_wait = 20.0
+        max_steps = 70
+        stable_rounds = 0
+        last_count = 0
         start_time = time.time()
-        max_wait = 12.0
-        same_count_rounds = 0
-        last_count = -1
 
-        while True:
-            cards = driver.find_elements("css selector", "div.thumbnail")
-            current_count = len(cards)
-
-            if current_count == last_count:
-                same_count_rounds += 1
-            else:
-                same_count_rounds = 0
-                last_count = current_count
-
-            if same_count_rounds >= 5:
-                break
+        for _ in range(max_steps):
             if time.time() - start_time > max_wait:
                 break
 
@@ -46,7 +36,21 @@ def scroll_and_scrape(url, scroll_pause=0.35):
             )
             time.sleep(scroll_pause)
 
+            cards = driver.find_elements("css selector", "div.thumbnail")
+            current_count = len(cards)
+
+            if current_count == last_count:
+                stable_rounds += 1
+            else:
+                stable_rounds = 0
+                last_count = current_count
+
+            if stable_rounds >= 10:
+                break
+
+        time.sleep(0.6)
         cards = driver.find_elements("css selector", "div.thumbnail")
+
         products = []
         seen = set()
 
@@ -76,24 +80,19 @@ def scroll_and_scrape(url, scroll_pause=0.35):
             )
             rating = len(stars)
 
-            item = {
-                "title": str(title),
-                "price": str(price),
-                "description": str(description),
-                "rating": int(rating),
-            }
-
-            key = (
-                item["title"],
-                item["price"],
-                item["description"],
-                item["rating"],
-            )
+            key = (str(title), str(price))
             if key in seen:
                 continue
-
             seen.add(key)
-            products.append(item)
+
+            products.append(
+                {
+                    "title": str(title),
+                    "price": str(price),
+                    "description": str(description),
+                    "rating": int(rating),
+                }
+            )
 
         return products
     finally:
