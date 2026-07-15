@@ -120,3 +120,19 @@ _Imports: `import time`, `from selenium import webdriver`_
 
 ## 8-scroll_and_scrape.py
 
+Write a function `def scroll_and_scrape(url, scroll_pause=2.0):` that scrolls and extracts all products from a JS‐rendered infinite‐scroll page
+
+The function should:
+
+- [ ] Open the given infinite-scroll page in headless Chrome.
+- [ ] Scroll to the bottom repeatedly, waiting scroll_pause seconds each time, until the page height stops increasing.
+- [ ] Find every div.thumbnail product card and extracts:
+- [ ] "title": the product name (from the title attribute of <a class="title">)
+- [ ] "price": the price (text of <h4 class="price">)
+- [ ] "description": the short description (text of <p class="description">)
+- [ ] "rating": the star count (number of <p class="ws-icon ws-icon-star"> under .ratings)
+- [ ] Skip duplicate products by tracking (title, price) pairs.
+- [ ] Return a list of unique product dicts, e.g.
+- [ ] Use only Selenium’s execute_script for scrolling and its element-finding APIs for extraction.
+
+_Imports: `import time`, `from selenium import webdriver`_
