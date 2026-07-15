@@ -71,3 +71,17 @@ _Imports: `import json`, `from bs4 import BeautifulSoup` and `fetch_html = __imp
 
 ## 5-login_and_scrape.py
 
+Write a function `def login_and_scrape(login_url, user, pwd):` that logs in and scrapes quotes visible only after authentication:
+
+- [ ] login_url is the login page (e.g. "https://quotes.toscrape.com/login")
+- [ ] Use requests.Session() to persist cookies across requests
+- [ ] GET the login form and extract the CSRF token from <input name="csrf_token">
+- [ ] POST credential fields (username, password, csrf_token) back to login_url
+- [ ] After successful login, GET the protected quotes page (https://quotes.toscrape.com/)
+- [ ] Use BeautifulSoup to parse each `<div class="quote">` and extract:
+    - "text": the quote text
+    - "author": the author’s name
+    - "tags": a list of tag strings
+- [ ] Return: a list of quote dicts, each with keys "text", "author", and "tags"
+
+_Imports: `import requests`, `from bs4 import BeautifulSoup`_
