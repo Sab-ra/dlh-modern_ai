@@ -88,3 +88,18 @@ _Imports: `import requests`, `from bs4 import BeautifulSoup`_
 
 ## 6-products_list.py
 
+Write a function `def scrape_products_list(url):` that opens a static product category page and returns a list of product dictionaries. Each dict should have:
+
+- [ ]"title": the product’s name (from the title attribute of the <a> tag)
+- [ ]"price": the product’s price (text of the <h4 class="price"> element)
+- [ ]"description": the product’s description (text of the <p class="description">)
+- [ ]"rating": the number of stars (<p data-rating="rating_value"> under .ratings)
+
+_Imports: `import time`, `from selenium import webdriver`_
+
+### For this task 6 and the rest of the tasks:
+
+- Use only Selenium (webdriver, By, etc.)
+- Run Chrome in headless mode in a 1920 by 1080 window and no sandbox.
+- Don’t use BeautifulSoup or regex
+
