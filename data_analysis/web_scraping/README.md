@@ -105,3 +105,15 @@ _Imports: `import time`, `from selenium import webdriver`_
 
 ## 7-product_detail.py
 
+**Scrape Single Product Detail**
+
+Write a function `def scrape_product_detail(url, delay=2.0):` that opens a detail page for one product, waits delay seconds, and returns a dictionary with:
+
+- [ ]"title": the product title (the second <h4> inside .caption)
+- [ ]"price": the price (text of the first <h4 class="price">)
+- [ ]"description": the full description (text of <p class="description">)
+- [ ]"rating": the number of stars (count of <p class="ws-icon ws-icon-star"> in .ratings)
+
+**Use only Selenium with find_element(s), CSS selectors, and no external parsers.**
+
+_Imports: `import time`, `from selenium import webdriver`_

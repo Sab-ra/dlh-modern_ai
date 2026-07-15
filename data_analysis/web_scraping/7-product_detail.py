@@ -1,0 +1,55 @@
+#!/usr/bin/env python3
+"""
+Scrape a single product detail page using Selenium.
+"""
+import time
+from selenium import webdriver
+
+
+def scrape_product_detail(url, delay=2.0):
+    """
+    Open one product page and return title, price, description, and rating.
+    """
+    options = webdriver.ChromeOptions()
+    options.add_argument("--headless")
+    options.add_argument("--window-size=1920,1080")
+    options.add_argument("--no-sandbox")
+    options.add_argument("--disable-dev-shm-usage")
+    options.add_argument("--disable-gpu")
+
+    driver = webdriver.Chrome(options=options)
+    try:
+        driver.get(url)
+        time.sleep(delay)
+
+        title = ""
+        price = ""
+        description = ""
+        rating = 0
+
+        title_nodes = driver.find_elements("css selector", ".caption h4")
+        if len(title_nodes) >= 2:
+            title = title_nodes[1].text.strip()
+
+        price_nodes = driver.find_elements("css selector", "h4.price")
+        if price_nodes:
+            price = price_nodes[0].text.strip()
+
+        desc_nodes = driver.find_elements("css selector", "p.description")
+        if desc_nodes:
+            description = desc_nodes[0].text.strip()
+
+        stars = driver.find_elements(
+            "css selector",
+            ".ratings p.ws-icon.ws-icon-star",
+        )
+        rating = len(stars)
+
+        return {
+            "title": str(title),
+            "price": str(price),
+            "description": str(description),
+            "rating": int(rating),
+        }
+    finally:
+        driver.quit()
