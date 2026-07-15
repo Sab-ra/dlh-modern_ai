@@ -1,6 +1,6 @@
 #!/usr/bin/env python3
 """
-Fetch products from a JS-rendered page with Selenium.
+Scrape product cards from a JS-rendered page with Selenium.
 """
 import time
 from selenium import webdriver
@@ -8,63 +8,62 @@ from selenium import webdriver
 
 def scrape_products(url):
     """
-    Open the page, wait for product cards, and return product data.
+    Open page, wait for products, and return normalized product records.
     """
     options = webdriver.ChromeOptions()
-    options.add_argument("--headless=new")
+    options.add_argument("--headless")
     options.add_argument("--no-sandbox")
     options.add_argument("--disable-dev-shm-usage")
+    options.add_argument("--disable-gpu")
 
     driver = webdriver.Chrome(options=options)
     try:
         driver.get(url)
 
-        selector = ".product, .product-card, .card"
-        cards = []
+        js = """
+const selectors = ['.product', '.product-card', '.card'];
+let cards = [];
+for (const s of selectors) {
+  cards = Array.from(document.querySelectorAll(s));
+  if (cards.length) break;
+}
+return cards.map((card) => {
+  const t = card.querySelector('h2, h3, .title, .product-title');
+  const p = card.querySelector('.price, .product-price, [data-price]');
+  const a = card.querySelector('a[href]');
+  return {
+    title: t ? t.textContent.trim() : '',
+    price: p ? p.textContent.trim() : '',
+    url: a ? a.href : ''
+  };
+});
+"""
+
+        items = []
         start = time.time()
         while time.time() - start < 10:
-            cards = driver.find_elements("css selector", selector)
-            if cards:
+            items = driver.execute_script(js)
+            if items:
                 break
             time.sleep(0.25)
 
-        items = []
-        for card in cards:
-            title = ""
-            price = ""
-            link = ""
-
-            title_el = card.find_elements(
-                "css selector", "h2, h3, .title, .product-title"
-            )
-            if title_el:
-                title = title_el[0].text.strip()
-
-            price_el = card.find_elements(
-                "css selector", ".price, .product-price, [data-price]"
-            )
-            if price_el:
-                price = price_el[0].text.strip()
-
-            link_el = card.find_elements("css selector", "a")
-            if link_el:
-                link = link_el[0].get_attribute("href") or ""
-
-            items.append(
+        normalized = []
+        for item in items:
+            normalized.append(
                 {
-                    "title": title,
-                    "price": price,
-                    "url": link,
+                    "title": str(item.get("title", "")),
+                    "price": str(item.get("price", "")),
+                    "url": str(item.get("url", "")),
                 }
             )
 
-        return items
+        return normalized
     finally:
         driver.quit()
 
 
 def products_list(url):
     """
-    Backward-compatible wrapper for the previous function name.
+    Keep backward compatibility with older function name.
     """
     return scrape_products(url)
