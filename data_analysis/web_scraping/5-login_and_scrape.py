@@ -47,8 +47,9 @@ def login_and_scrape(login_url, user, pwd):
 
             quotes_data.append({
                 "text": text_tag.get_text(strip=True) if text_tag else "",
-                "author": author_tag.get_text(strip=True
-                                              ) if author_tag else "",
+                "author": (
+                    author_tag.get_text(strip=True) if author_tag else ""
+                    ),
                 "tags": [tag.get_text(strip=True) for tag in tag_links],
             })
 
