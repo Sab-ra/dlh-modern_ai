@@ -15,17 +15,26 @@ _Only import: import requests_
 ## 1-scrape_basic.py
 
 Write a function `def scrape_basic(url):` that scrapes the first page of quotes from **quotes.toscrape.com**:
-
-url is the Quotes List endpoint (e.g. https://quotes.toscrape.com/)
-Use fetch_html() to retrieve the HTML then parse it with **BeautifulSoup**
-Extract for each quote block:
+- [x] 
+- [x] url is the Quotes List endpoint (e.g. https://quotes.toscrape.com/)
+- [x] Use fetch_html() to retrieve the HTML then parse it with **BeautifulSoup**
+- [x] Extract for each quote block:
     - "text": the quote text
     - "author": the quote’s author
     - "tags": a list of tag strings
-You are not allowed to use regular expressions for this task
-Returns: a list of dicts, e.g. [{ "text": "...", "author": "...", "tags": [...] }, …]
+- [x] You are not allowed to use regular expressions for this task
+- [x] Returns: a list of dicts, e.g. [{ "text": "...", "author": "...", "tags": [...] }, …]
 
 _Imports: `from bs4 import BeautifulSoup` and `fetch_html = __import__('0-fetch_html').fetch_html`_
 
 ## 2-scrape_paginated.py
 
+Write a function `def scrape_paginated(base_url):` that follows “Next” links on **quotes.toscrape.com** until no more pages remain:
+
+- [ ] base_url is the first page URL (https://quotes.toscrape.com/)
+- [ ] Must detect and follow the <li class="next"><a href="…"> link dynamically
+- [ ] Implement delays between requests (e.g. time.sleep)
+- [ ] Combine results from all pages into one list
+- [ ] Returns: the full list of quote dicts (same format as Task 1)
+
+_Imports: `from bs4 import BeautifulSoup`, `import time`, `from urllib import parse`, `fetch_html = __import__('0-fetch_html').fetch_html and scrape_basic = __import__('1-scrape_basic').scrape_basic`_
