@@ -68,3 +68,6 @@ Write a function `def extract_jsonld(url):` that pulls quotes from embedded JSON
 - [x] Return: a list of quote dicts, each with keys "text", "author", and "tags"
 
 _Imports: `import json`, `from bs4 import BeautifulSoup` and `fetch_html = __import__('0-fetch_html').fetch_html`_
+
+## 5-login_and_scrape.py
+
