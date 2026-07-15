@@ -26,3 +26,6 @@ You are not allowed to use regular expressions for this task
 Returns: a list of dicts, e.g. [{ "text": "...", "author": "...", "tags": [...] }, …]
 
 _Imports: `from bs4 import BeautifulSoup` and `fetch_html = __import__('0-fetch_html').fetch_html`_
+
+## 2-scrape_paginated.py
+
