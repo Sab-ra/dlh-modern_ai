@@ -19,6 +19,7 @@ After that line always add meaningful docstring
 Docstring like this
 """
 And in every function the first thing after the function declaration must be a meaningfull docstring
+No codeline shall be longer than 79 char!!!
 
 ## Plotting and Visualization Style
 

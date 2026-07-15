@@ -52,9 +52,17 @@ def extract_jsonld(url):
 
             keywords = item.get("keywords", [])
             if isinstance(keywords, str):
-                tags = [tag.strip() for tag in keywords.split(",") if tag.strip()]
+                tags = [
+                    tag.strip()
+                    for tag in keywords.split(",")
+                    if tag.strip()
+                ]
             elif isinstance(keywords, list):
-                tags = [str(tag).strip() for tag in keywords if str(tag).strip()]
+                tags = [
+                    str(tag).strip()
+                    for tag in keywords
+                    if str(tag).strip()
+                ]
             else:
                 tags = []
 
