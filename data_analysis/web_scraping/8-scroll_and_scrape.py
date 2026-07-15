@@ -6,9 +6,9 @@ import time
 from selenium import webdriver
 
 
-def scroll_and_scrape(url, scroll_pause=2.0):
+def scroll_and_scrape(url, scroll_pause=1.0):
     """
-    Scroll until page height stops growing, then scrape unique products.
+    Scroll with hard stop, then return unique product records.
     """
     options = webdriver.ChromeOptions()
     options.add_argument("--headless")
@@ -21,12 +21,19 @@ def scroll_and_scrape(url, scroll_pause=2.0):
     try:
         driver.get(url)
 
+        start_time = time.time()
+        max_wait = 22
+        max_scrolls = 80
+        stable_rounds = 0
         last_height = driver.execute_script(
             "return document.body.scrollHeight"
         )
-        stable_rounds = 0
+        last_count = 0
 
-        while stable_rounds < 2:
+        for _ in range(max_scrolls):
+            if time.time() - start_time > max_wait:
+                break
+
             driver.execute_script(
                 "window.scrollTo(0, document.body.scrollHeight);"
             )
@@ -35,11 +42,20 @@ def scroll_and_scrape(url, scroll_pause=2.0):
             new_height = driver.execute_script(
                 "return document.body.scrollHeight"
             )
-            if new_height == last_height:
+            new_count = len(
+                driver.find_elements("css selector", "div.thumbnail")
+            )
+
+            if new_height == last_height and new_count == last_count:
                 stable_rounds += 1
             else:
                 stable_rounds = 0
-                last_height = new_height
+
+            last_height = new_height
+            last_count = new_count
+
+            if stable_rounds >= 3:
+                break
 
         cards = driver.find_elements("css selector", "div.thumbnail")
         products = []
@@ -65,40 +81,36 @@ def scroll_and_scrape(url, scroll_pause=2.0):
             if desc_el:
                 description = desc_el[0].text.strip()
 
-            stars = card.find_elements(
-                "css selector",
-                ".ratings p.ws-icon.ws-icon-star",
-            )
-            if not stars:
-                stars = card.find_elements(
-                    "css selector",
-                    ".ratings .ws-icon-star",
-                )
-            rating = len(stars)
+            rating_el = card.find_elements("css selector", "[data-rating]")
+            if rating_el:
+                raw = rating_el[0].get_attribute("data-rating") or "0"
+                if raw.isdigit():
+                    rating = int(raw)
 
             if rating == 0:
-                rating_el = card.find_elements(
+                stars = card.find_elements(
                     "css selector",
-                    ".ratings [data-rating]",
+                    ".ratings .ws-icon-star, .ratings .glyphicon-star",
                 )
-                if rating_el:
-                    raw = rating_el[0].get_attribute("data-rating") or "0"
-                    if raw.isdigit():
-                        rating = int(raw)
+                rating = len(stars)
 
-            key = (title, price)
+            item = {
+                "title": str(title),
+                "price": str(price),
+                "description": str(description),
+                "rating": int(rating),
+            }
+
+            key = (
+                item["title"],
+                item["price"],
+                item["description"],
+                item["rating"],
+            )
             if key in seen:
                 continue
             seen.add(key)
-
-            products.append(
-                {
-                    "title": str(title),
-                    "price": str(price),
-                    "description": str(description),
-                    "rating": int(rating),
-                }
-            )
+            products.append(item)
 
         return products
     finally:
