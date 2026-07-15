@@ -6,9 +6,9 @@ import time
 from selenium import webdriver
 
 
-def scroll_and_scrape(url, scroll_pause=1.0):
+def scroll_and_scrape(url, scroll_pause=0.35):
     """
-    Scroll with hard stop, then return unique product records.
+    Scroll with strict time limits, then return unique product records.
     """
     options = webdriver.ChromeOptions()
     options.add_argument("--headless")
@@ -22,15 +22,22 @@ def scroll_and_scrape(url, scroll_pause=1.0):
         driver.get(url)
 
         start_time = time.time()
-        max_wait = 22
-        max_scrolls = 80
-        stable_rounds = 0
-        last_height = driver.execute_script(
-            "return document.body.scrollHeight"
-        )
-        last_count = 0
+        max_wait = 12.0
+        same_count_rounds = 0
+        last_count = -1
 
-        for _ in range(max_scrolls):
+        while True:
+            cards = driver.find_elements("css selector", "div.thumbnail")
+            current_count = len(cards)
+
+            if current_count == last_count:
+                same_count_rounds += 1
+            else:
+                same_count_rounds = 0
+                last_count = current_count
+
+            if same_count_rounds >= 5:
+                break
             if time.time() - start_time > max_wait:
                 break
 
@@ -38,24 +45,6 @@ def scroll_and_scrape(url, scroll_pause=1.0):
                 "window.scrollTo(0, document.body.scrollHeight);"
             )
             time.sleep(scroll_pause)
-
-            new_height = driver.execute_script(
-                "return document.body.scrollHeight"
-            )
-            new_count = len(
-                driver.find_elements("css selector", "div.thumbnail")
-            )
-
-            if new_height == last_height and new_count == last_count:
-                stable_rounds += 1
-            else:
-                stable_rounds = 0
-
-            last_height = new_height
-            last_count = new_count
-
-            if stable_rounds >= 3:
-                break
 
         cards = driver.find_elements("css selector", "div.thumbnail")
         products = []
@@ -81,18 +70,11 @@ def scroll_and_scrape(url, scroll_pause=1.0):
             if desc_el:
                 description = desc_el[0].text.strip()
 
-            rating_el = card.find_elements("css selector", "[data-rating]")
-            if rating_el:
-                raw = rating_el[0].get_attribute("data-rating") or "0"
-                if raw.isdigit():
-                    rating = int(raw)
-
-            if rating == 0:
-                stars = card.find_elements(
-                    "css selector",
-                    ".ratings .ws-icon-star, .ratings .glyphicon-star",
-                )
-                rating = len(stars)
+            stars = card.find_elements(
+                "css selector",
+                ".ratings .ws-icon-star, .ratings .glyphicon-star",
+            )
+            rating = len(stars)
 
             item = {
                 "title": str(title),
@@ -109,6 +91,7 @@ def scroll_and_scrape(url, scroll_pause=1.0):
             )
             if key in seen:
                 continue
+
             seen.add(key)
             products.append(item)
 
