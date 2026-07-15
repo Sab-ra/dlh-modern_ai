@@ -1,4 +1,5 @@
 #!/usr/bin/env python3
+"""Deep Dive to Statics"""
 from bs4 import BeautifulSoup
 import time
 from urllib import parse
@@ -8,6 +9,7 @@ scrape_basic = __import__('1-scrape_basic').scrape_basic
 
 
 def scrape_paginated(base_url):
+    """Follows 'Next' links to the bottom"""
     all_quotes = []
     current_url = base_url
 
