@@ -36,3 +36,6 @@ Returns:
 _Required import: `from sklearn import decomposition`._
 
 **Full PCA: Transform All Features & Show All Components**
+
+## 2-k_means.py
+
