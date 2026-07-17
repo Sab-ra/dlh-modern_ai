@@ -1,4 +1,4 @@
-#!/usr/bin/env pythin3
+#!/usr/bin/env python3
 """
 Evaluate K-Means clustering for different numbers of clusters
 """
