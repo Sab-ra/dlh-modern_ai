@@ -4,7 +4,7 @@ Standartize tabular data
 """
 from sklearn import preprocessing
 
-def standardize(X):
+def Standardize(X):
     """
     Use StandardScaler form Scikit learn
     """
