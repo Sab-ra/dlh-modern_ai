@@ -14,3 +14,6 @@ X (numpy.ndarray): Tabular data of shape (n_samples, n_features)
 numpy.ndarray: The standardized version of the input data, with the same shape as X.
 
 _Required import: `from sklearn import preprocessing`_.
+
+## 1-pca.py
+
