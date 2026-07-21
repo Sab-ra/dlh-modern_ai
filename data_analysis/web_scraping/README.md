@@ -31,11 +31,11 @@ _Imports: `from bs4 import BeautifulSoup` and `fetch_html = __import__('0-fetch_
 
 Write a function `def scrape_paginated(base_url):` that follows “Next” links on **quotes.toscrape.com** until no more pages remain:
 
-- [ ] base_url is the first page URL (https://quotes.toscrape.com/)
-- [ ] Must detect and follow the <li class="next"><a href="…"> link dynamically
-- [ ] Implement delays between requests (e.g. time.sleep)
-- [ ] Combine results from all pages into one list
-- [ ] Returns: the full list of quote dicts (same format as Task 1)
+- [x] base_url is the first page URL (https://quotes.toscrape.com/)
+- [x] Must detect and follow the <li class="next"><a href="…"> link dynamically
+- [x] Implement delays between requests (e.g. time.sleep)
+- [x] Combine results from all pages into one list
+- [x] Returns: the full list of quote dicts (same format as Task 1)
 
 _Imports: `from bs4 import BeautifulSoup`, `import time`, `from urllib import parse`, `fetch_html = __import__('0-fetch_html').fetch_html and scrape_basic = __import__('1-scrape_basic').scrape_basic`_
 
