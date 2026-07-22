@@ -21,3 +21,13 @@ _Required import: `from sklearn import tree`._
 
 ## 1-train.py
 
+### Train a Tree-Based Classifier
+
+Write a function `train_tree(clf, X, y)` to train a tree-based classifier using Scikit-learn.
+
+Arguments:
+- clf: A Scikit-learn classifier instance
+- X: Input features
+- y: Target labels
+
+Returns: `None`
