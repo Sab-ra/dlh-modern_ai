@@ -11,4 +11,4 @@ def ridge_regression(random_state):
     Rounding out but never delete features
     """
 
-    return linear_model.RidgeClassifier(random_state)
+    return linear_model.Ridge(random_state=random_state)
