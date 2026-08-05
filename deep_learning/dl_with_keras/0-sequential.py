@@ -6,7 +6,7 @@ Performs multi-class classification
 from tensorflow import keras
 
 
-def build_model(input_dim):
+def build_model(input_dim, neurons_h):
     """
     Use Sequential class
     """
@@ -14,7 +14,7 @@ def build_model(input_dim):
     model = keras.Sequential(
         [
             keras.layers.Input(shape=(input_dim,)),
-            keras.layers.Dense(1, activation='sigmoid'),
+            keras.layers.Dense(neurons_h, activation='sigmoid'),
             keras.layers.Dense(2, activation='softmax')
         ]
     )
