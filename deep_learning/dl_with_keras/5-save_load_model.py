@@ -6,6 +6,7 @@ and optimizer state
 """
 from tensorflow import keras
 
+
 def save_model(model, filepath):
     """
     Host your bitch with her beautycase
