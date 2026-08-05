@@ -18,4 +18,4 @@ def load_model(filepath):
     """
     Call your bitch when you need her
     """
-    keras.models.load_model(filepath)
+    return keras.models.load_model(filepath)
