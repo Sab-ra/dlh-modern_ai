@@ -39,7 +39,7 @@ Returns:
 
 ## 1-functional.py
 
-### Build Model using another alternative
+### Build Model using Functional API alternative
 
 Write a function `build_model(input_dim, neurons_h)` to create a shallow neural network with a single hidden layer to perform multi-class classification, without using the Sequential class.
 

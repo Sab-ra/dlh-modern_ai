@@ -11,12 +11,10 @@ def build_model(input_dim, neurons_h):
     without using the Sequential class
     """
 
-    model = keras.Functional(
-        [
-            keras.layers.Input(shape=(input_dim,)),
-            keras.layers.Dense(neurons_h, activation='sigmoid'),
-            keras.layers.Dense(10, activation='softmax')
-        ]
-    )
+    inputs = keras.layers.Input(shape=(input_dim,))
+    hidden = keras.layers.Dense(neurons_h, activation='sigmoid')(inputs)
+    outputs = keras.layers.Dense(10, activation='softmax')(hidden)
+
+    model = keras.Model(inputs, outputs)
 
     return model
