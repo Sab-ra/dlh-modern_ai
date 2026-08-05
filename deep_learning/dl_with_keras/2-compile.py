@@ -13,7 +13,7 @@ def compile_model(model, learning_rate=0.01):
     """
     optimizer = keras.optimizers.SGD(learning_rate=learning_rate)
     model.compile(
-        optimizer = optimizer,
+        optimizer=optimizer,
         loss='binary_crossentropy',
         metrics=['accuracy']
     )
