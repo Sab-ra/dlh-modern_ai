@@ -2,12 +2,11 @@
 """
 Train keras model
 """
-from tensorflow import keras
 
 
 def train_model(model, X, Y, epochs, verbose=1):
     """
-    Buy your bitch fitness membourship
+    Buy fitness memborship to your bitch!
     """
     model.fit(
         X, Y,
