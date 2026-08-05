@@ -11,4 +11,12 @@ def build_model(input_dim):
     Use Sequential class
     """
 
-    return keras.Model(input_dim=input_dim, neurons_h=1)
+    model = keras.Sequential(
+        [
+            keras.layers.Input(shape=(input_dim,)),
+            keras.layers.Dense(1, activation='sigmoid'),
+            keras.layers.Dense(2, activation='softmax')
+        ]
+    )
+
+    return model
