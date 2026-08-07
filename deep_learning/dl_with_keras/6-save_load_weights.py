@@ -2,7 +2,6 @@
 """
 Save space, move only weights
 """
-from tensorflow import keras
 
 
 def save_model_weights(model, filepath):
