@@ -12,8 +12,6 @@ def predict(model, X, verbose=0):
     """
 
     probabilities = model.predict(X, verbose=verbose)
-    predicted_classes = tf.argmax(
-        probabilities,
-        axis=1
-    )
-    return tf.keras.backend.get_value(predicted_classes)
+    predicted_classes = tf.math.argmax(probabilities, axis=1)
+
+    return predicted_classes.numpy()
