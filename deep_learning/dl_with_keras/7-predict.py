@@ -16,4 +16,4 @@ def predict(model, X, verbose=0):
         probabilities,
         axis=1
     )
-    return predicted_classes.numpy().tolist()
+    return tf.keras.backend.get_value(predicted_classes)
