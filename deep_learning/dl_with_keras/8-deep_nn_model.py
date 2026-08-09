@@ -1,6 +1,6 @@
 #!/usr/bin/env python3
 """
-Build a deep Neural Network using 
+Build a deep Neural Network using
 Sequential class
 not safe, he-he
 """
