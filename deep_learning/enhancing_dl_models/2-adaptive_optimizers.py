@@ -37,7 +37,7 @@ def get_optimizer(
     if learning_rate <= 0:
         raise ValueError('Lerning rate shall be positive float')
 
-    if name == 'sdg':
+    if name == 'sgd':
         return keras.optimizers.SGD(
             learning_rate=learning_rate,
             momentum=momentum
