@@ -21,10 +21,10 @@ def train_with_gradient_descent_variant(
 
     if not isinstance(variant, str):
         raise TypeError('Argument "variant" shall be string')
-    if not isinstance(learning_rate, float):
+    if not isinstance(learning_rate, (float, int)):
         raise TypeError('Argument "learning_rate" shall be float')
-    if not isinstance(x_train, list):
-        raise TypeError('Argument "x_train" shall be array')
+    if not hasattr(x_train, '__len__'):
+        raise TypeError('Argument "x_train" shall be array-like')
     if not isinstance(batch_size, int):
         raise TypeError('Argument "batch_size" shall be integer')
     if batch_size <= 0:
