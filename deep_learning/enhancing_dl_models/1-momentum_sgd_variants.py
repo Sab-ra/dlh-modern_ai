@@ -39,3 +39,5 @@ def get_optimizer_SGD(
         momentum=momentum,
         nesterov=nesterov
     )
+
+    return optimizer
