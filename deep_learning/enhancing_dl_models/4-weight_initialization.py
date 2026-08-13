@@ -34,7 +34,7 @@ def build_model_initializer_by_activation(
     inputs = keras.layers.Input(shape=(input_dim,))
 
     if activation == 'leaky_relu':
-        act = activation=keras.layers.LeakyReLU(),
+        act = keras.layers.LeakyReLU(),
     else:
         act = activation
 
