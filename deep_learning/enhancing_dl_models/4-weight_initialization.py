@@ -28,7 +28,7 @@ def build_model_initializer_by_activation(
 
     if activation == 'sigmoid' or activation == 'tanh':
         initializer = keras.initializers.GlorotUniform()
-    elif activation == 'relu' or activation == 'tanh':
+    elif activation == 'relu' or activation == 'leaky_relu':
         initializer = keras.initializers.HeNormal()
     else:
         raise ValueError('Check function docs for activation names')
@@ -40,7 +40,7 @@ def build_model_initializer_by_activation(
         activation=activation,
         kernel_initializer=initializer
         )(inputs)
-    outputs = keras.layers.Dense(activation='softmax')(hidden)
+    outputs = keras.layers.Dense(10, activation='softmax')(hidden)
 
     model = keras.Model(inputs, outputs)
 
