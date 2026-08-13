@@ -24,12 +24,13 @@ def build_model_with_L2_regularization(
             raise TypeError(
                 f'{name} must be int, got {type(value).__name__}'
             )
-    if not isinstance(lambda_l2, float):
+    if not isinstance(lambda_l2, (float, int)):
         raise TypeError('Lambda L2 must be float')
+
+    lambda_l2 = float(lambda_l2)
 
     inputs = keras.layers.Input(shape=(input_dim,))
     x = inputs
-
     for _ in range(n_layers):
         x = keras.layers.Dense(
             hidden_units,
