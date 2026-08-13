@@ -17,34 +17,22 @@ def build_model_initializer_by_activation(
     returns a fucking shallow model
     """
 
-    if not isinstance(
-        (input_dim, hidden_units), int
-    ):
-        raise TypeError(
-            'Wahtch out amounts of model features and neurons, baby'
-            )
+    if not isinstance(input_dim, int):
+        raise TypeError('Var input_dim shall be int')
+    if not isinstance(hidden_units, int):
+        raise TypeError('Var hidden_units shall be int')
     if not isinstance(activation, str):
         raise TypeError('You need to name it a special word')
 
-    shvamba_returnada = {
-        'sigmoid': 'GlorotUniform',
-        'tanh': 'GlorotUniform',
-        'relu': 'HeNormal',
-        'leaky_relu': 'HeNormal'
-    }
-
-    if activation == 'sigmoid' or activation == 'tanh':
+    if activation in('sigmoid', 'tanh'):
         initializer = keras.initializers.GlorotUniform()
-    elif activation == 'relu' or activation == 'leaky_relu':
+    elif activation in('relu', 'leaky_relu'):
         initializer = keras.initializers.HeNormal()
     else:
         raise ValueError('Check function docs for activation names')
 
-    architecture = shvamba_returnada
-
     inputs = keras.layers.Input(shape=(input_dim,))
     hidden = keras.layers.Dense(
-        1,
         units=hidden_units,
         activation=activation,
         kernel_initializer=initializer
@@ -52,6 +40,10 @@ def build_model_initializer_by_activation(
     outputs = keras.layers.Dense(10, activation='softmax')(hidden)
 
     model = keras.Model(inputs, outputs)
-    model
+    model.compile(
+        optimizer=keras.optimizers.Adam(),
+        loss='sparse_categorical_crossentropy',
+        metrics=['accuracy']
+    )
 
-    return model, architecture
+    return model
