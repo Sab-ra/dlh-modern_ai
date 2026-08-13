@@ -26,12 +26,16 @@ def build_model_initializer_by_activation(
     if not isinstance(activation, str):
         raise TypeError('You need to name it a special word')
 
+    shvamba_returnada = {}
+
     if activation == 'sigmoid' or activation == 'tanh':
         initializer = keras.initializers.GlorotUniform()
     elif activation == 'relu' or activation == 'leaky_relu':
         initializer = keras.initializers.HeNormal()
     else:
         raise ValueError('Check function docs for activation names')
+
+    shvamba_returnada
 
     inputs = keras.layers.Input(shape=(input_dim,))
     hidden = keras.layers.Dense(
@@ -43,5 +47,11 @@ def build_model_initializer_by_activation(
     outputs = keras.layers.Dense(10, activation='softmax')(hidden)
 
     model = keras.Model(inputs, outputs)
+    model
 
-    return model
+    return {
+        'sigmoid': 'GlorotUniform',
+        'tanh': 'GlorotUniform',
+        'relu': 'HeNormal',
+        'leaky_relu': 'HeNormal'
+    }
