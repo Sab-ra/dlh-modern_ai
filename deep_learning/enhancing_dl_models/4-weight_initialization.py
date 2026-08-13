@@ -24,9 +24,9 @@ def build_model_initializer_by_activation(
     if not isinstance(activation, str):
         raise TypeError('You need to name it a special word')
 
-    if activation in('sigmoid', 'tanh'):
+    if activation in ('sigmoid', 'tanh'):
         initializer = keras.initializers.GlorotUniform()
-    elif activation in('relu', 'leaky_relu'):
+    elif activation in ('relu', 'leaky_relu'):
         initializer = keras.initializers.HeNormal()
     else:
         raise ValueError('Check function docs for activation names')
@@ -34,17 +34,15 @@ def build_model_initializer_by_activation(
     inputs = keras.layers.Input(shape=(input_dim,))
 
     if activation == 'leaky_relu':
-        hidden = keras.layers.Dense(
-            units=hidden_units,
-            activation=keras.layers.LeakyReLU(),
-            kernel_initializer=initializer
-        )(inputs)
+        act = activation=keras.layers.LeakyReLU(),
     else:
-        hidden = keras.layers.Dense(
-            units=hidden_units,
-            activation=activation,
-            kernel_initializer=initializer
-        )(inputs)
+        act = activation
+
+    hidden = keras.layers.Dense(
+        units=hidden_units,
+        activation=act,
+        kernel_initializer=initializer
+    )(inputs)
         
     outputs = keras.layers.Dense(10, activation='softmax')(hidden)
 
