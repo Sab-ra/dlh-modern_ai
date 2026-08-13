@@ -45,7 +45,7 @@ def build_model_initializer_by_activation(
             activation=activation,
             kernel_initializer=initializer
         )(inputs)
-        
+
     outputs = keras.layers.Dense(10, activation='softmax')(hidden)
 
     model = keras.Model(inputs, outputs)
