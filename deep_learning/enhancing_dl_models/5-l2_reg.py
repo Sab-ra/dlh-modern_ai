@@ -28,26 +28,17 @@ def build_model_with_L2_regularization(
         raise TypeError('Lambda L2 must be float')
 
     inputs = keras.layers.Input(shape=(input_dim,))
-    hidden_layers = []
-    for i in range(n_layers):
-        if i == 0:
-            hidden_layers.append(
-                keras.layers.Dense(
-                hidden_units,
-                activation='relu',
-                kernel_regularizer=keras.regularizers.l2(lambda_l2)
-                )(inputs)
-            )
-        else:
-            hidden_layers.append(keras.layers.Dense(
-                hidden_units,
-                activation='relu',
-                kernel_regularizer=keras.regularizers.l2(lambda_l2)
-                )(hidden_layers[i-1])
-            )
+    x = inputs
+
+    for _ in range(n_layers):
+        x = keras.layers.Dense(
+            hidden_units,
+            activation='relu',
+            kernel_regularizer=keras.regularizers.l2(lambda_l2)
+        )(x)
     outputs = keras.layers.Dense(
         10,
-        activation='softmax')(hidden_layers[n_layers-1])
+        activation='softmax')(x)
 
     model = keras.Model(inputs, outputs)
 
