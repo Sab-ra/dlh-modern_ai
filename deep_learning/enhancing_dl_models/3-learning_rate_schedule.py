@@ -13,7 +13,7 @@ def get_optimizer_SGD_with_schedule(
         momentum
 ):
     """
-    Scholastic Gradient Descent with 
+    Scholastic Gradient Descent with
     learning rate schedules of types:
     'exponential' or 'inverse_time'
     """
