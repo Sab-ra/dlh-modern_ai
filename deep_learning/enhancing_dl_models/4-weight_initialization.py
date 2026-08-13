@@ -26,7 +26,12 @@ def build_model_initializer_by_activation(
     if not isinstance(activation, str):
         raise TypeError('You need to name it a special word')
 
-    shvamba_returnada = {}
+    shvamba_returnada = {
+        'sigmoid': 'GlorotUniform',
+        'tanh': 'GlorotUniform',
+        'relu': 'HeNormal',
+        'leaky_relu': 'HeNormal'
+    }
 
     if activation == 'sigmoid' or activation == 'tanh':
         initializer = keras.initializers.GlorotUniform()
@@ -35,7 +40,7 @@ def build_model_initializer_by_activation(
     else:
         raise ValueError('Check function docs for activation names')
 
-    shvamba_returnada
+    architecture = shvamba_returnada
 
     inputs = keras.layers.Input(shape=(input_dim,))
     hidden = keras.layers.Dense(
@@ -49,9 +54,4 @@ def build_model_initializer_by_activation(
     model = keras.Model(inputs, outputs)
     model
 
-    return {
-        'sigmoid': 'GlorotUniform',
-        'tanh': 'GlorotUniform',
-        'relu': 'HeNormal',
-        'leaky_relu': 'HeNormal'
-    }
+    return model, architecture
