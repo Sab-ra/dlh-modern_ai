@@ -31,13 +31,23 @@ def build_model_initializer_by_activation(
     else:
         raise ValueError('Check function docs for activation names')
 
-    inputs = keras.layers.Input(shape=(input_dim,))
-    hidden = keras.layers.Dense(
-        units=hidden_units,
-        activation=activation,
-        kernel_initializer=initializer
+    if activation != 'leaky_relu':
+        inputs = keras.layers.Input(shape=(input_dim,))
+        hidden = keras.layers.Dense(
+            units=hidden_units,
+            activation=activation,
+            kernel_initializer=initializer
+            )(inputs)
+        outputs = keras.layers.Dense(10, activation='softmax')(hidden)
+    else:
+        inputs = keras.layers.Input(shape=(input_dim,))
+        hidden = keras.layers.Dense(
+            units=hidden_units,
+            activation=None,
+            kernel_initializer=initializer
         )(inputs)
-    outputs = keras.layers.Dense(10, activation='softmax')(hidden)
+        leaky_re_lu = keras.layers.LeakyReLu(negative_slope=0.3)(hidden)
+        outputs = keras.layers.Dense(10, activation='softmax')(leaky_re_lu)
 
     model = keras.Model(inputs, outputs)
     model.compile(
