@@ -34,15 +34,17 @@ def build_model_initializer_by_activation(
     inputs = keras.layers.Input(shape=(input_dim,))
 
     if activation == 'leaky_relu':
-        act = keras.layers.LeakyReLU(),
+        hidden = keras.layers.Dense(
+            units=hidden_units,
+            activation=keras.layers.LeakyReLU(),
+            kernel_initializer=initializer
+        )(inputs)
     else:
-        act = activation
-
-    hidden = keras.layers.Dense(
-        units=hidden_units,
-        activation=act,
-        kernel_initializer=initializer
-    )(inputs)
+        hidden = keras.layers.Dense(
+            units=hidden_units,
+            activation=activation,
+            kernel_initializer=initializer
+        )(inputs)
         
     outputs = keras.layers.Dense(10, activation='softmax')(hidden)
 
