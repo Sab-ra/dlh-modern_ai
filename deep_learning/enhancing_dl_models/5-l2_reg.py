@@ -31,17 +31,20 @@ def build_model_with_L2_regularization(
     hidden_layers = []
     for i in range(n_layers):
         if i == 0:
-            hidden_layers[i] = keras.layers.Dense(
+            hidden_layers.append(
+                keras.layers.Dense(
                 hidden_units,
                 activation='relu',
                 kernel_regularizer=keras.regularizers.l2(lambda_l2)
-            )(inputs)
+                )(inputs)
+            )
         else:
-            hidden_layers[i] = keras.layers.Dense(
+            hidden_layers.append(keras.layers.Dense(
                 hidden_units,
                 activation='relu',
                 kernel_regularizer=keras.regularizers.l2(lambda_l2)
-            )(hidden_layers[i-1])
+                )(hidden_layers[i-1])
+            )
     outputs = keras.layers.Dense(
         10,
         activation='softmax')(hidden_layers[n_layers-1])
