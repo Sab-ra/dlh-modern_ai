@@ -31,22 +31,24 @@ def get_optimizer_SGD_with_schedule(
 
     if schedule_type == 'exponential':
         lr_schedule = keras.optimizers.schedules.LearningRateSchedule(
-            schedule_type='exponential',
+            schedule_class='ExponentialDecay',
             decay_steps=decay_steps,
-            decay_rate=decay_rate
+            decay_rate=decay_rate,
+            staircase=True
         )
     elif schedule_type == 'inverse_time':
         lr_schedule = keras.optimizers.schedules.LearningRateSchedule(
-            schedule_type='inverse_time',
+            schedule_class='InverseTimeDecay',
             decay_steps=decay_steps,
-            decay_rate=decay_rate
+            decay_rate=decay_rate,
+            staircase=True
         )
     else:
         raise ValueError('Check function doc for shedule types')
 
     optimizer = keras.optimizers.SGD(
-        learning_rate=initial_lr,
-        schedule=lr_schedule
+        learning_rate=lr_schedule,
+        momentum=momentum
         )
 
     return optimizer, lr_schedule
