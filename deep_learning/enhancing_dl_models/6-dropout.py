@@ -37,21 +37,15 @@ def build_model_with_dropout(
     dropout_rate_input = float(dropout_rate_input)
     dropout_rate_hidden = float(dropout_rate_hidden)
 
-    inputs = keras.layers.Input(
-        shape=(input_dim,),
-        kernel_regularizer=keras.regularizers.dropout(
-            dropout_rate=dropout_rate_input
-            )
-        )
+    inputs = keras.layers.Input(shape=(input_dim,))
     x = inputs
+    x = keras.layers.Dropout(rate=dropout_rate_input)(x)
     for _ in range(n_layers):
         x = keras.layers.Dense(
             hidden_units,
-            activation='relu',
-            kernel_regularizer=keras.regularizers.dropout(
-                dropout_rate=dropout_rate_hidden
-            )
+            activation='relu'
         )(x)
+        x = keras.layers.Dropout(rate=dropout_rate_hidden)(x)
     outputs = keras.layers.Dense(10, activation='softmax')(x)
 
     model = keras.Model(inputs, outputs)
