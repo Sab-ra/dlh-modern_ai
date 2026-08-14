@@ -20,7 +20,7 @@ def log_to_tensorboard(
     timestamp = datetime.datetime.now().strftime(
         '%Y%m%d-%H%M%S'
     )
-    full_log_dir = f{log_dir}/{timestamp}
+    full_log_dir = f'{log_dir}/{timestamp}'
 
     tensorboard_callback = keras.callbacks.TensorBoard(
         log_dir=full_log_dir,
