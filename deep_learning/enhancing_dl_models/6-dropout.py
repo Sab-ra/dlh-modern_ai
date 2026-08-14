@@ -34,8 +34,6 @@ def build_model_with_dropout(
             raise TypeError(
                 f'{name} must be float, got {type(value).__name__}'
             )
-    # dropout_rate_input = float(dropout_rate_input)
-    # dropout_rate_hidden = float(dropout_rate_hidden)
 
     inputs = keras.layers.Input(shape=(input_dim,))
     x = inputs
