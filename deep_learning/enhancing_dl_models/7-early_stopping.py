@@ -32,10 +32,10 @@ def get_early_stopping_callback(
             'Check func docs for accepted values of monitor'
         )
     else:
-        fuck = keras.callbacks.EarlyStopping(
+        callback_with_best_wights = keras.callbacks.EarlyStopping(
             monitor=monitor,
             patience=patience,
             verbose=verbose,
             restore_best_weights=True
         )
-    return fuck
+    return callback_with_best_wights
