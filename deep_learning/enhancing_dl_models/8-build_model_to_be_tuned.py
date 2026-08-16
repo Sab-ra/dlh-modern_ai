@@ -56,7 +56,7 @@ def build_model(hp):
     model.compile(
         optimizer=optimizer,
         loss='sparse_categorical_crossentropy',
-        metrcs=['accuracy']
+        metrics=['accuracy']
     )
 
     return model
