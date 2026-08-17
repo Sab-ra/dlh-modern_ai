@@ -9,11 +9,10 @@ import keras_tuner
 def initiate_tuner(
         tuner_type,
         build_model,
-        x_train,
-        y_train,
         seed,
         hyperband_iterations,
-        max_trials
+        max_trials,
+        objective
 ):
     """
     Returns keras tuner object ready to use
@@ -21,7 +20,6 @@ def initiate_tuner(
     'Hyperband', 'RandomSearch', or 'BayesianOptimization'
     """
 
-    objective = 'val_accuracy'
     overwrite = True
 
     if tuner_type == 'Hyperband':
@@ -42,7 +40,7 @@ def initiate_tuner(
             overwrite=overwrite
         )
     elif tuner_type == 'BayesianOptimization':
-        turner = keras_tuner.BayesianOptimization(
+        tuner = keras_tuner.BayesianOptimization(
             hypermodel=build_model,
             objective=objective,
             max_trials=max_trials,
