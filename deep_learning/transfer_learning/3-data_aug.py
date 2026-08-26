@@ -14,18 +14,18 @@ def build_data_augmentation():
     return tf.keras.Sequential([
         tf.keras.layers.RandomFlip(
             'horizontal',
-            seed
+            seed=seed
         ),
         tf.keras.layers.RandomRotation(
             0.15,
-            seed
+            seed=seed
         ),
         tf.keras.layers.RandomZoom(
             0.15,
-            seed
+            seed=seed
         ),
         tf.keras.layers.RandomContrast(
             0.1,
-            seed
+            seed=seed
         )
     ])
