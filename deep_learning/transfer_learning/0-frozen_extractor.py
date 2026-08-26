@@ -2,8 +2,6 @@
 """
 Pull a awift brain and preserve it's knowledge
 """
-import matplotlib.pyplot as plt
-import seaborn as sns
 
 
 def build_feature_extractor():
