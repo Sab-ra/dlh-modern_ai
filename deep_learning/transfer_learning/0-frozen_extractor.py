@@ -19,7 +19,7 @@ def build_feature_extractor():
     base_model.trainable = False
 
     model = keras.Sequential([
-        keras.layers.Input(shape=(224, 224, 3)),
+        keras.layers.InputLayer(shape=(224, 224, 3)),
         base_model,
         keras.layers.GlobalAveragePooling2D()
     ])
