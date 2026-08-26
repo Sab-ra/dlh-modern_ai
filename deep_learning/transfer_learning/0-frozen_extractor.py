@@ -2,7 +2,7 @@
 """
 Pull a awift brain and preserve it's knowledge
 """
-
+from tensorflow import keras
 
 def build_feature_extractor():
     """
