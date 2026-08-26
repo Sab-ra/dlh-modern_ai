@@ -18,9 +18,8 @@ def build_feature_extractor():
     )
     base_model.trainable = False
 
-    model = keras.Sequential()
-    model.add(keras.layers.InputLayer(shape=(224, 224, 3)))
-    model.add(base_model)
-    model.add(keras.layers.GlobalAveragePooling2D())
+    inputs = keras.Input(shape=(224, 224, 3))
+    features = base_model(inputs, training=False)
+    outputs = keras.layers.GlobalAveragePooling2D()(features)
 
-    return model
+    return keras.Model(inputs, outputs)
