@@ -11,7 +11,6 @@ def unfreeze_top_layers(model, n_layers):
     base CNN
     """
 
-
     for layer in model.layers:
         layer.trainable = False
 
