@@ -50,7 +50,7 @@ def create_cnn_model(
                  filters=layer_filters,
                  kernel_size=kernel_size,
                  activation=activation,
-                 padding='same'
+                 padding='valid'
             ))
             model.add(pooling_layer(
                  pool_size=(2, 2)
@@ -63,7 +63,7 @@ def create_cnn_model(
 
     model.compile(
          optimizer='adam',
-         loss='categorical_crossentropy',
+         loss='sparse_categorical_crossentropy',
          metrics=['accuracy']
     )
 
