@@ -48,13 +48,13 @@ def create_cnn_model(
         filters, kernel_sizes, activations
         ):
             model.add(keras.layers.Conv2D(
-                 filters=layer_filters,
-                 kernel_size=kernel_size,
-                 activation=activation,
-                 padding='valid'
+                filters=layer_filters,
+                kernel_size=kernel_size,
+                activation=activation,
+                padding='valid'
             ))
             model.add(pooling_layer(
-                 pool_size=(2, 2)
+                pool_size=(2, 2)
             ))
 
     model.add(keras.layers.Flatten())
