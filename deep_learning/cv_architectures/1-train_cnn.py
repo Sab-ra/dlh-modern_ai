@@ -9,8 +9,6 @@ def complile_and_train_cnn(
         model,
         x_train,
         y_train,
-        x_val,
-        y_val,
         epochs,
         batch_size,
         optimizer_name='adam',
