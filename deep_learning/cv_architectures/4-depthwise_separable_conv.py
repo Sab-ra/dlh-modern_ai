@@ -25,7 +25,7 @@ def depthwise_separable_conv(X, filters, stride=1):
     x = keras.layers.Conv2D(
         filters=filters,
         kernel_size=(1, 1),
-        strides=stride,
+        strides=1,
         padding='same',
         use_bias=False
     )(x)
