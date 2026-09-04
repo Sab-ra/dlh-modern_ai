@@ -101,9 +101,17 @@ The architecture should:
 - 23 blocks in conv4_x
 - 3 blocks in conv5_x
 - Downsample spatial dimensions at the start of each stage (except the first).
-- End with global average pooling and a fully connected classification layer.
-
-You may use the following helper function to build each stage:
+- End with global average pooling and a fully connected classification layer. _You may use the following helper function to build each stage:_
+```python
+def make_layer(x, blocks, filters, stride=1, name=None):
+    x = bottleneck_block(x, filters, stride=stride, downsample=True,
+                         name=f'{name}_block1')
+    for i in range(1, blocks):
+        x = bottleneck_block(x, filters, stride=1, downsample=False,
+                             name=f'{name}_block{i+1}')
+    return x
+```
+- Returns the Keras model implementing the ResNet‑101 architecture.
 
 ## 4-depthwise_separable_conv.py
 

@@ -71,7 +71,7 @@ def bottleneck_block(
             name=f'{prefix}shortcut_conv'
         )(shortcut)
         shortcut = K.layers.BatchNormalization(
-            name=f'{print}shortcut_bn'
+            name=f'{prefix}shortcut_bn'
         )(shortcut)
 
     x = K.layers.Add(
