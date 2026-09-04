@@ -96,4 +96,11 @@ data/
 # =========================
 tmp/
 temp/
+
+# ==
+# Bulky model pieces
+# ==
+*.h5
+*.keras
+*.weights.h5
 `
