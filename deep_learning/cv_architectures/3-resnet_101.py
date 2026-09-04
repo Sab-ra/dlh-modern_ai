@@ -4,77 +4,7 @@ Build a ResNet-101 model.
 """
 from tensorflow import keras
 
-
-def bottleneck_block(x, filters, stride=1, downsample=False, name=None):
-    """
-    Build a bottleneck residual block with standardized layer names.
-    """
-    prefix = '' if name is None else f'{name}_'
-    shortcut = x
-
-    x = keras.layers.Conv2D(
-        filters,
-        kernel_size=(1, 1),
-        strides=stride,
-        padding='same',
-        use_bias=False,
-        name=f'{prefix}conv1'
-    )(x)
-    x = keras.layers.BatchNormalization(
-        name=f'{prefix}bn1'
-    )(x)
-    x = keras.layers.ReLU(
-        name=f'{prefix}relu1'
-    )(x)
-
-    x = keras.layers.Conv2D(
-        filters,
-        kernel_size=(3, 3),
-        strides=1,
-        padding='same',
-        use_bias=False,
-        name=f'{prefix}conv2'
-    )(x)
-    x = keras.layers.BatchNormalization(
-        name=f'{prefix}bn2'
-    )(x)
-    x = keras.layers.ReLU(
-        name=f'{prefix}relu2'
-    )(x)
-
-    x = keras.layers.Conv2D(
-        filters * 4,
-        kernel_size=(1, 1),
-        strides=1,
-        padding='same',
-        use_bias=False,
-        name=f'{prefix}conv3'
-    )(x)
-    x = keras.layers.BatchNormalization(
-        name=f'{prefix}bn3'
-    )(x)
-
-    if downsample:
-        shortcut = keras.layers.Conv2D(
-            filters * 4,
-            kernel_size=(1, 1),
-            strides=stride,
-            padding='same',
-            use_bias=False,
-            name=f'{prefix}shortcut_conv'
-        )(shortcut)
-        shortcut = keras.layers.BatchNormalization(
-            name=f'{prefix}shortcut_bn'
-        )(shortcut)
-
-    x = keras.layers.Add(
-        name=f'{prefix}add'
-    )([x, shortcut])
-    x = keras.layers.ReLU(
-        name=f'{prefix}out'
-    )(x)
-
-    return x
+bottleneck_block = __import__('2-bottleneck_block').bottleneck_block
 
 
 def make_layer(x, blocks, filters, stride=1, name=None):

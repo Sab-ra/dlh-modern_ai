@@ -2,7 +2,7 @@
 """
 Build a ResNet bottleneck residual block
 """
-# from tensorflow import keras
+from tensorflow import keras as K
 
 
 def bottleneck_block(
