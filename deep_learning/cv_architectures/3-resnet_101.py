@@ -1,77 +1,80 @@
 #!/usr/bin/env python3
 """
-Build a ResNet-101 model
+Build a ResNet-101 model.
 """
-from tensorflow import keras as K
+from tensorflow import keras
+
+
+def conv_bn_relu(
+        x,
+        filters,
+        kernel_size,
+        strides=1,
+        name=None
+):
+    """
+    Apply convolution, batch normalization, and ReLU.
+    """
+    x = keras.layers.Conv2D(
+        filters,
+        kernel_size,
+        strides=strides,
+        padding='same',
+        use_bias=False,
+        name=f'{name}_conv'
+    )(x)
+    x = keras.layers.BatchNormalization(
+        name=f'{name}_bn'
+    )(x)
+    return keras.layers.ReLU(
+        name=f'{name}_relu'
+    )(x)
+
 
 def bottleneck_block(x, filters, stride=1, downsample=False, name=None):
     """
-    Build a bottleneck residual block locally.
+    Build a bottleneck residual block.
     """
-    prefix = '' if name is None else f'{name}_'
     shortcut = x
 
-    x = K.layers.Conv2D(
-        filters,
-        (1, 1),
-        strides=stride,
-        padding='same',
-        use_bias=False,
-        name=f'{prefix}conv1'
-    )(x)
-    x = K.layers.BatchNormalization(
-        name=f'{prefix}bn1'
-    )(x)
-    x = K.layers.ReLU(
-        name=f'{prefix}relu1'
-    )(x)
+    x = conv_bn_relu(
+        x, filters, (1, 1), stride, f'{name}_conv1'
+    )
+    x = conv_bn_relu(
+        x, filters, (3, 3), 1, f'{name}_conv2'
+    )
 
-    x = K.layers.Conv2D(
-        filters,
-        (3, 3),
-        padding='same',
-        use_bias=False,
-        name=f'{prefix}conv2'
-    )(x)
-    x = K.layers.BatchNormalization(
-        name=f'{prefix}bn2'
-    )(x)
-    x = K.layers.ReLU(
-        name=f'{prefix}relu2'
-    )(x)
-
-    x = K.layers.Conv2D(
+    x = keras.layers.Conv2D(
         filters * 4,
         (1, 1),
         padding='same',
         use_bias=False,
-        name=f'{prefix}conv3'
+        name=f'{name}_conv3'
     )(x)
-    x = K.layers.BatchNormalization(
-        name=f'{prefix}bn3'
+    x = keras.layers.BatchNormalization(
+        name=f'{name}_bn3'
     )(x)
 
     if downsample:
-        shortcut = K.layers.Conv2D(
+        shortcut = keras.layers.Conv2D(
             filters * 4,
             (1, 1),
             strides=stride,
             padding='same',
             use_bias=False,
-            name=f'{prefix}shortcut_conv'
+            name=f'{name}_shortcut_conv'
         )(shortcut)
-        shortcut = K.layers.BatchNormalization(
-            name=f'{prefix}shortcut_bn'
+        shortcut = keras.layers.BatchNormalization(
+            name=f'{name}_shortcut_bn'
         )(shortcut)
 
-    x = K.layers.Add(
-        name=f'{prefix}add'
+    x = keras.layers.Add(
+        name=f'{name}_add'
     )([x, shortcut])
-    x = K.layers.ReLU(
-        name=f'{prefix}out'
-    )(x)
 
-    return x
+    return keras.layers.ReLU(
+        name=f'{name}_out'
+    )(x)
 
 
 def make_layer(x, blocks, filters, stride=1, name=None):
@@ -86,11 +89,11 @@ def make_layer(x, blocks, filters, stride=1, name=None):
         name=f'{name}_block1'
     )
 
-    for block_number in range(1, blocks):
+    for block_number in range(2, blocks + 1):
         x = bottleneck_block(
             x,
             filters,
-            name=f'{name}_block{block_number + 1}'
+            name=f'{name}_block{block_number}'
         )
 
     return x
@@ -100,19 +103,16 @@ def build_resnet101(input_shape=(224, 224, 3), num_classes=1000):
     """
     Build and return a ResNet-101 model.
     """
-    inputs = K.Input(shape=input_shape)
+    inputs = keras.Input(shape=input_shape)
 
-    x = K.layers.Conv2D(
+    x = conv_bn_relu(
+        inputs,
         64,
         (7, 7),
         strides=2,
-        padding='same',
-        use_bias=False,
         name='conv1'
-    )(inputs)
-    x = K.layers.BatchNormalization(name='conv1_bn')(x)
-    x = K.layers.ReLU(name='conv1_relu')(x)
-    x = K.layers.MaxPooling2D(
+    )
+    x = keras.layers.MaxPooling2D(
         (3, 3),
         strides=2,
         padding='same',
@@ -124,11 +124,17 @@ def build_resnet101(input_shape=(224, 224, 3), num_classes=1000):
     x = make_layer(x, 23, 256, stride=2, name='conv4')
     x = make_layer(x, 3, 512, stride=2, name='conv5')
 
-    x = K.layers.GlobalAveragePooling2D(name='avg_pool')(x)
-    outputs = K.layers.Dense(
+    x = keras.layers.GlobalAveragePooling2D(
+        name='avg_pool'
+    )(x)
+    outputs = keras.layers.Dense(
         num_classes,
         activation='softmax',
         name='predictions'
     )(x)
 
-    return K.Model(inputs, outputs, name='resnet101')
+    return keras.Model(
+        inputs,
+        outputs,
+        name='resnet101'
+    )
