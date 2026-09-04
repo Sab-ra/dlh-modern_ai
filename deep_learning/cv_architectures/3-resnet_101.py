@@ -2,7 +2,7 @@
 """
 Build a ResNet-101 model.
 """
-# from tensorflow import keras
+from tensorflow import keras as K
 
 
 def conv_bn_relu(
