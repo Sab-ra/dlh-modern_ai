@@ -6,7 +6,7 @@ with batch norm and ReLU
 from tensorflow import keras
 
 
-def depthwize_separable_conv(X, filters, stride=1):
+def depthwise_separable_conv(X, filters, stride=1):
     """
     Apply depthwise separable convolution
     """
