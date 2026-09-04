@@ -45,8 +45,7 @@ def create_cnn_model(
         )
 
     for layer_filters, kernel_size, activation in zip(
-        filters, kernel_sizes, activations
-        ):
+        filters, kernel_sizes, activations):
             model.add(keras.layers.Conv2D(
                 filters=layer_filters,
                 kernel_size=kernel_size,
