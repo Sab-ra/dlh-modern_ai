@@ -9,6 +9,7 @@ depthwise_separable_conv = __import__(
     '4-depthwise_separable_conv'
 ).depthwise_separable_conv
 
+
 def mobilenet_backbone(inputs):
     """
     Extract features
