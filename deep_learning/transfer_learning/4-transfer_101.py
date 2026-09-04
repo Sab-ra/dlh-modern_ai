@@ -9,7 +9,7 @@ from tensorflow import keras
 
 def train_transfer_model():
     """
-    Train, fine-tune, and save a 
+    Train, fine-tune, and save a
     Caltech-101 image classifier
     """
 
@@ -20,7 +20,7 @@ def train_transfer_model():
     b_ze = 32
 
     train_data = keras.utils.image_dataset_from_directory(
-        data_dir = d_dir,
+        directory=d_dir,
         validation_split=vs,
         subset='training',
         seed=sd,
@@ -29,8 +29,8 @@ def train_transfer_model():
     )
 
     vld_data = keras.utils.image_dataset_from_directory(
-        data_dir = d_dir,
-        validataion_split=vs,
+        directory=d_dir,
+        validation_split=vs,
         subset='validation',
         seed=sd,
         image_size=i_ze,
@@ -56,7 +56,7 @@ def train_transfer_model():
 
     inputs = keras.Input(shape=(224, 224, 3))
     x = augmtn(inputs)
-    x = keras.activations.mobilenet_v2.preprocess_input(x)
+    x = keras.applications.mobilenet_v2.preprocess_input(x)
     x = base_model(x, training=False)
     x = keras.layers.GlobalAveragePooling2D()(x)
     x = keras.layers.Dropout(0.2)(x)
@@ -108,11 +108,11 @@ def train_transfer_model():
         if isinstance(
             layer,
             keras.layers.BatchNormalization
-            ):
+        ):
             layer.trainable = False
 
     model.compile(
-        optimizer = keras.optimizers.Adam(
+        optimizer=keras.optimizers.Adam(
             learning_rate=1e-5
         ),
         loss='sparse_categorical_crossentropy',
