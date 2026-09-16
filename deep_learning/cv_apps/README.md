@@ -63,18 +63,18 @@ names: ["person", "car", "bicycle"]
 Write a function `def basic_aug(image, bboxes, labels):` that applies YOLO-compatible data augmentation using Albumentations.
 
 Arguments:
-- image (np.ndarray): Input image
-- bboxes (List[List[int]]): Bounding boxes in Pascal VOC format
-- labels (List[int]): Class labels corresponding to each bounding box
+- `image` (np.ndarray): Input image
+- `bboxes` (List[List[int]]): Bounding boxes in Pascal VOC format
+- `labels` (List[int]): Class labels corresponding to each bounding box
 
 The function must apply the following transformations:
-- random horizontal flipping (p = 0.5)
-- brightness/contrast augmentation (p = 0.2)
-- Affine (translate_percent: 0.1, scale 0.1, rotate [-30, 0] with p = 0.5)
+- random horizontal flipping (`p = 0.5`)
+- brightness/contrast augmentation (`p = 0.2`)
+- Affine (`translate_percent: 0.1`, `scale 0.1`, `rotate [-30, 0]` with `p = 0.5`)
 
-Returns the augmented image np.ndarray, augmented bounding boxes np.ndarray and labels List[int]
+Returns the augmented image `np.ndarray`, augmented bounding boxes `np.ndarray` and labels `List[int]`
 
-Note: For reproducibility, set seed=42 (A.Compose([...], seed=42)
+Note: For reproducibility, set `seed=42` (`A.Compose([...], seed=42)`)
 
 ## 2-custom_aug.py
 
