@@ -28,7 +28,6 @@ def train_with_augmentation(
         'epochs': epochs,
         'imgsz': imgsz,
         'batch': batch,
-        'augment': augmentation,
         'save': save,
         'plots': plots,
         'verbose': verbose
