@@ -1,6 +1,6 @@
 #!/usr/bin/env python3
 """
-YOLO-compatible basic augumentation with Albumentations
+YOLO-compatible basic augmentation with Albumentations
 """
 import albumentations as A
 import numpy as np
@@ -35,6 +35,6 @@ def basic_aug(image, bboxes, labels):
         labels=labels
     )
     boxes = np.asarray(out['bboxes'])
-    labs = [int(x) for x in out['labels']]
+    labs = list(out['labels'])
 
     return out['image'], boxes, labs
