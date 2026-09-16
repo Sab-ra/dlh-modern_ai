@@ -27,13 +27,14 @@ def custom_aug(image, bboxes, labels):
                         p=0.2
                     )
                 ],
-                bbox_params=A.BboxParams(
-                    format='pascal_voc',
-                    label_fields=['labels']
-                ),
-                seed=42
+                p=0.9
             )
-        ]
+        ],
+        bbox_params=A.BboxParams(
+            format='pascal_voc',
+            label_fields=['labels']
+        ),
+        seed=42
     )
     output = transform(
         image = image,
