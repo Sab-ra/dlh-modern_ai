@@ -37,7 +37,7 @@ def custom_aug(image, bboxes, labels):
         seed=42
     )
     output = transform(
-        image = image,
+        image=image,
         bboxes=bboxes,
         labels=labels
     )
