@@ -25,7 +25,7 @@ YAML_TEXT = (
 
 def read_ids(list_path):
     """
-    Read imabe ID's from a sample list file.
+    Read image IDs from a sample list file.
     """
     ids = []
     with open(list_path, 'r', encoding='utf-8') as handle:
@@ -68,8 +68,8 @@ def parse_voc_xml(xml_path):
         box = obj.find('bndbox')
         xmin = float(box.find('xmin').text)
         ymin = float(box.find('ymin').text)
-        xmax = float(box.find('xmax'). text)
-        ymax = float(box.find('ymax'). text)
+        xmax = float(box.find('xmax').text)
+        ymax = float(box.find('ymax').text)
         xc, yc, bw, bh = voc_box_to_yolo(
             xmin, ymin, xmax, ymax, width, height
         )
@@ -77,7 +77,7 @@ def parse_voc_xml(xml_path):
             continue
         cid = CLASS_TO_ID[name]
         line = (
-            f'{cid} {xc:.6f} {yc:.6f}'
+            f'{cid} {xc:.6f} {yc:.6f} '
             f'{bw:.6f} {bh:.6f}'
         )
         lines.append(line)
@@ -91,8 +91,8 @@ def export_split(ids, voc_root, img_out, lbl_out):
     """
     jpeg_dir = voc_root / 'JPEGImages'
     ann_dir = voc_root / 'Annotations'
-    img_out.mkdir(parents = True, exist_ok=True)
-    lbl_out.mkdir(parents = True, exist_ok=True)
+    img_out.mkdir(parents=True, exist_ok=True)
+    lbl_out.mkdir(parents=True, exist_ok=True)
 
     for stem in ids:
         src_img = jpeg_dir / f'{stem}.jpg'
@@ -103,7 +103,7 @@ def export_split(ids, voc_root, img_out, lbl_out):
             raise FileNotFoundError(src_xml)
         shutil.copy2(src_img, img_out / f'{stem}.jpg')
         lines = parse_voc_xml(src_xml)
-        lbl_path = lbl_out / f'{steam}.txt'
+        lbl_path = lbl_out / f'{stem}.txt'
         with open(lbl_path, 'w', encoding='utf-8') as handle:
             handle.write('\n'.join(lines))
             if lines:
@@ -151,6 +151,6 @@ def prep_data(
     write_data_yaml(out_root / 'data.yaml')
 
 
-if __name__=='__main__':
+if __name__ == '__main__':
     voc = Path('VOCdevkit') / 'VOC2012'
     prep_data(voc)
