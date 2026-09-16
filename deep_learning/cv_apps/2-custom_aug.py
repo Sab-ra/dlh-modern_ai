@@ -41,6 +41,6 @@ def custom_aug(image, bboxes, labels):
         labels=labels
     )
     boxes = np.asarray(output['bboxes'])
-    labs = [int(x) for x in output['labels']]
+    labs = list(output['labels'])
 
     return output['image'], boxes, labs
