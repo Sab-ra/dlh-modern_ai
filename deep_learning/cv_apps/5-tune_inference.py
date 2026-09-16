@@ -2,7 +2,6 @@
 """
 Grid-search YOLO conf and NMS IoU on validation
 """
-import pandas as pd
 from ultralytics import YOLO
 
 
@@ -29,30 +28,30 @@ def _f1(precision, recall):
     )
 
 
-def tune_inference(
+def inference_tuning(
+        data_yaml,
         model,
-        val_images_path,
-        conf_thresholds=[
-            0.25, 0.3, 0.35, 0.4, 0.45, 0.5
-        ],
-        iou_thresholds=[
-            0.4, 0.45, 0.5, 0.55, 0.6, 0.65
-        ],
+        conf_list=None,
+        iou_list=None,
         imgsz=640
 ):
     """
     Try every conf/IoU pair with model.val()
     """
+    if conf_list is None:
+        conf_list = [
+            0.25, 0.3, 0.35, 0.4, 0.45, 0.5
+        ]
+    if iou_list is None:
+        iou_list = [
+            0.4, 0.45, 0.5, 0.55, 0.6, 0.65
+        ]
     yolo = _as_yolo(model)
-    data = val_images_path
-    if not str(data).endswith(('.yaml', '.yml')):
-        data = DATA
-    rows = []
-    best = None
-    for conf in conf_thresholds:
-        for iou in iou_thresholds:
+    results = []
+    for conf in conf_list:
+        for iou in iou_list:
             metrics = yolo.val(
-                data=data,
+                data=data_yaml,
                 conf=conf,
                 iou=iou,
                 imgsz=imgsz,
@@ -64,31 +63,14 @@ def tune_inference(
             recall = float(metrics.box.mr)
             map50 = float(metrics.box.map50)
             map5095 = float(metrics.box.map)
-            f1 = _f1(precision, recall)
-            row = {
+            results.append({
                 'conf': conf,
                 'iou': iou,
                 'mAP50': map50,
                 'mAP5095': map5095,
                 'precision': precision,
                 'recall': recall,
-                'F1': f1
-            }
-            rows.append(row)
-            score = (f1, map50, map5095)
-            if best is None or score > best[0]:
-                best = (score, row)
-    all_results = pd.DataFrame(rows)
-    winner = best[1]
-    return {
-        'best_conf': winner['conf'],
-        'best_iou': winner['iou'],
-        'best_metrics': {
-            'mAP50': winner['mAP50'],
-            'mAP50-95': winner['mAP5095'],
-            'precision': winner['precision'],
-            'recall': winner['recall'],
-            'F1': winner['F1']
-        },
-        'all_results': all_results
-    }
+                'F1': _f1(precision, recall)
+            })
+
+    return results
