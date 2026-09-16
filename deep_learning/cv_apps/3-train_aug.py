@@ -11,7 +11,7 @@ def train_with_augmentation(
         epochs=50,
         imgsz=640,
         batch=16,
-        augmentation=False,
+        augmentation=None,
         yolo_aug_params=None,
         albumentations_transforms=None,
         save=False,
@@ -32,6 +32,18 @@ def train_with_augmentation(
         'plots': plots,
         'verbose': verbose
     }
+    if augmentation is False:
+        train_kw.update({
+            'hsv_h': 0.0,
+            'hsv_s': 0.0,
+            'hsv_v': 0.0,
+            'translate': 0.0,
+            'scale': 0.0,
+            'fliplr': 0.0,
+            'mosaic': 0.0,
+            'auto_augment': None,
+            'erasing': 0.0
+        })
     if yolo_aug_params:
         train_kw.update(yolo_aug_params)
     if albumentations_transforms:
