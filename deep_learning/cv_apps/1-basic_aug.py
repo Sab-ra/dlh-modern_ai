@@ -9,7 +9,7 @@ import numpy as np
 def basic_aug(image, bboxes, labels):
     """
     Apply flip, brightness/contrast, and
-    affine to an image and 
+    affine to an image and
     its Pascal VOC boxes
     """
     transform = A.Compose(
