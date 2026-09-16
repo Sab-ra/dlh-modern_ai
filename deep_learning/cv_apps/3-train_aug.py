@@ -11,12 +11,12 @@ def train_with_augmentation(
         epochs=50,
         imgsz=640,
         batch=16,
-        augmentation=True,
+        augmentation=False,
         yolo_aug_params=None,
         albumentations_transforms=None,
-        save=True,
-        plots=True,
-        verbose=True
+        save=False,
+        plots=False,
+        verbose=False
 ):
     """
     Train a YOLO model with native and
