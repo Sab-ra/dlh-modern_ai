@@ -35,4 +35,4 @@ def explore_data(df):
     ax2.set_xlabel('lenght')
     ax2.set_ylabel('count')
 
-    plt.tight_layout(fig)
+    plt.tight_layout()
