@@ -32,7 +32,7 @@ def explore_data(df):
         ax=ax2
     )
     ax2.set_title('Histogram of Raw Message Lengths')
-    ax2.set_xlabel('lenght')
+    ax2.set_xlabel('lengh')
     ax2.set_ylabel('count')
 
     plt.tight_layout()
