@@ -82,6 +82,7 @@ Thumbs.db
 # Datasets
 datasets/
 data/
+data_analysis/intro_to_nlp/SMSSpamCollection
 
 # Or use project-specific paths instead:
 # pipeline/datasets/*.csv

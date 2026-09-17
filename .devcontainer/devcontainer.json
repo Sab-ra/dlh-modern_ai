@@ -28,6 +28,8 @@
     }
   },
 
-  "postCreateCommand":
-    "python -m ipykernel install --user"
+  "postCreateCommand": {
+    "ipykernel": "python -m ipykernel install --user",
+    "nltk": "python -m nltk.downloader punkt stopwords wordnet punkt_tab"
+  }
 }
