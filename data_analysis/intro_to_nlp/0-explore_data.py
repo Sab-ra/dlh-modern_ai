@@ -19,6 +19,8 @@ def explore_data(df):
     sns.barplot(
         x=counts.index,
         y=counts.values,
+        hue=counts.index,
+        legend=False,
         ax=ax1
     )
     ax1.set_title('Ham vs Spam Counts')
