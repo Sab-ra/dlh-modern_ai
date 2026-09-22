@@ -15,13 +15,13 @@ _DATASET_PLACEHOLDER_MAP = {
     '<email>':   '<EMAIL>',
 }
 _URL_RE = re.compile(
-    r'https?://\S+|www\.\S+|http?://\S+'
+    r'https?://\S+|www\.\S+'
 )
 _PHONE_RE = re.compile(
     r'\+?\d[\d\s\-]{6,}\d'
 )
 _NUMBER_RE = re.compile(
-    r'(?:£|\$|€)\d+(?:[.,]\d+)*|(?<!<)\b\b+(?:[.,]|d+)*\b'
+    r'(?:£|\$|€)\d+(?:[.,]\d+)*|(?<!<)\b\d+(?:[.,]\d+)*\b'
 )
 _REPEAT_BANG_RE = re.compile(r'!{2,}')
 _REPEAT_QMARK_RE = re.compile(r'\?{2,}')
@@ -37,12 +37,13 @@ def normalize_unicode_punct(text):
         '[\u2018\u2019\u201a\u201b]': "'",
         '[\u201c\u201d\u201e\u201f]': '"',
         '[\u2010\u2011\u2012\u2013\u2014\u2015\u2212]': '-',
-        '\u2026': '...'        
+        '\u2026': '...'
     }
     for pattern, repl in replacements.items():
         text = re.sub(pattern, repl, text)
 
     return text
+
 
 def clean_text(
     text,
@@ -78,10 +79,6 @@ def clean_text(
         )
     elif emoji_action == 'remove':
         text = emoji.replace_emoji(text, replace=' ')
-    else:
-        raise ValueError(
-            'illegal emoji action: must be "replace" or "remove"'
-        )
 
     text = _REPEAT_BANG_RE.sub('!', text)
     text = _REPEAT_QMARK_RE.sub('?', text)
