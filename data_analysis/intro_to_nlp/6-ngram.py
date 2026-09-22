@@ -9,7 +9,7 @@ def generate_ngrams(tokens, n=2):
     """
     Join each n consecutive tokens with an underscore.
     """
-    if not isinstance(token, list) or len(tokens) < n:
+    if not isinstance(tokens, list) or len(tokens) < n:
         return []
 
     return [
