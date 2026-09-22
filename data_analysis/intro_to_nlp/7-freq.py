@@ -1,10 +1,10 @@
 #!/usr/bin/env python3
 """
-Word frequence distribution for
+Word frequency distribution for
 a preprocessed corpus.
 """
 import nltk
-import patplotlib.pyplot as plt
+import matplotlib.pyplot as plt
 
 
 def plot_top_n_frequencies(corpus_tokens, n=20):
@@ -27,6 +27,5 @@ def plot_top_n_frequencies(corpus_tokens, n=20):
     plt.ylabel('Frequency')
 
     plt.tight_layout()
-    plt.show()
 
     return freq_dist
