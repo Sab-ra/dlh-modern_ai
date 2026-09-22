@@ -15,7 +15,7 @@ EMOTICON_MAP = {
     "o:)": "<EMO>"
 }
 
-_TWEET_TOKENIZER = nltk.tokenize.TwetTokenizer(
+_TWEET_TOKENIZER = nltk.tokenize.TweetTokenizer(
     reduce_len=True
 )
 
@@ -38,8 +38,8 @@ def normalize_emoticons(
         if mapped:
             if emoticon_action == 'replace':
                 result.append(mapped)
-            else:
-                result.append(token)
+        else:
+            result.append(token)
 
     return result
 
