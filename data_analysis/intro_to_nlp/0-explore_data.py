@@ -11,7 +11,7 @@ def explore_data(df):
     Creates a figure with two subplots
     side by side: bar- and hist-plot.
     """
-    fig, (ax1, ax2) = plt.subplots(
+    _, (ax1, ax2) = plt.subplots(
         1, 2, figsize=(12, 4)
     )
 
@@ -19,8 +19,6 @@ def explore_data(df):
     sns.barplot(
         x=counts.index,
         y=counts.values,
-        hue=counts.index,
-        legend=False,
         ax=ax1
     )
     ax1.set_title('Ham vs Spam Counts')
@@ -38,3 +36,4 @@ def explore_data(df):
     ax2.set_ylabel('count')
 
     plt.tight_layout()
+    plt.show()
