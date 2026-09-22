@@ -34,8 +34,8 @@ def normalize_unicode_punct(text):
     etc. with ASCII equivalents.
     """
     replacements = {
-        '[\u2018\u2019\u201a\u201b]': "'",
-        '[\u201c\u201d\u201e\u201f]': '"',
+        # '[\u2018\u2019\u201a\u201b]': "'",
+        # '[\u201c\u201d\u201e\u201f]': '"',
         '[\u2010\u2011\u2012\u2013\u2014\u2015\u2212]': '-',
         '\u2026': '...'
     }
