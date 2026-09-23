@@ -36,6 +36,6 @@ def fasttext_embeddings(
             continue
         vecs = [model.wv[t] for t in tokens]
         rows.append(np.mean(vecs, axis=0))
-    X=np.vstack(rows).astype(np.float64)
+    X = np.vstack(rows).astype(np.float64)
 
     return X, model
