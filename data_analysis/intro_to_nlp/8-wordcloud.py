@@ -15,7 +15,7 @@ def generate_wordcloud(
     """
     Build and display a WordCloud object.
     """
-    text = ''.join(tok for doc in corpus_tokens for tok in doc)
+    text = ' '.join(tok for doc in corpus_tokens for tok in doc)
     wc = wordcloud.WordCloud(
         max_words=max_words,
         background_color='white',
