@@ -839,7 +839,7 @@ for word, weight in sorted(wc_ham.words_.items(),
 
 ```
 
-## 10-bow.py
+## 10-bag_of_words.py
 
 ### 9. BoW
 
