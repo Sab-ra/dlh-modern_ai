@@ -37,6 +37,6 @@ def word2vec_embeddings(
             rows.append(np.mean(vecs, axis=0))
         else:
             rows.append(np.zeros(vector_size))
-    X = np.vstack(rows)
+    X = np.vstack(rows).astype(np.float64)
 
     return X, model
