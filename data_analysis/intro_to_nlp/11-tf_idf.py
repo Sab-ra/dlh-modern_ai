@@ -17,7 +17,7 @@ def tf_idf(
     Fit TfidfVectorizer; return (X, vectorizer).
     """
     docs = [' '.join(tokens) for tokens in courpus_tokens]
-    vectorizer = sklearn.feature_extraction.text.TfidVectorizer(
+    vectorizer = sklearn.feature_extraction.text.TfidfVectorizer(
         tokenizer=str.split,
         lowercase=False,
         token_pattern=None,
