@@ -1,5 +1,22 @@
 # LLMs
 
+## Learining Objectives
+
+At the end of this project, you are expected to be able to explain to anyone, without the help of Google:
+
+### General
+
+- What is a Large Language Model (LLM)?
+- How do LLMs learn to understand and generate language?
+- What are the main uses of LLMs in real-world applications?
+- How are LLMs used in chatbots and virtual assistants?
+- How can LLMs help with tasks like summarization or translation?
+- What role do tokens play in how LLMs process text?
+- What are embeddings, and how do they help LLMs understand meaning?
+- What factors affect the accuracy and performance of an LLM?
+- What are some ethical concerns or risks when using LLMs?
+- How can LLMs be adapted or fine-tuned for specific domains?
+
 ## 0-load_mlm.py
 
 ### 0. (MLM) Load RoBERTa
