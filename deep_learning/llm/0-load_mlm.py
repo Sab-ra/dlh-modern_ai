@@ -16,7 +16,7 @@ def load_mlm(model_name):
     """
     model = (
         transformers.RobertaForMaskedLM.from_pretrained(
-        model_name
+            model_name
         )
     )
     model.eval()
