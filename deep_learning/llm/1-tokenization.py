@@ -2,7 +2,6 @@
 """
 Cut text into numbered pieces for RoBERTa
 """
-from sre_parse import Tokenizer
 import transformers
 
 
