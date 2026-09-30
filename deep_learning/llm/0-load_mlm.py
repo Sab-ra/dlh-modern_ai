@@ -3,7 +3,7 @@
 Load a pretrained RoBERTa model for
 fill-in-the-blank.
 """
-from transformers import RobertaForMaskedLM
+import transformers
 
 
 def load_mlm(model_name):
@@ -14,8 +14,10 @@ def load_mlm(model_name):
     Returns:
         RobertaForMaskedLM: model set for business
     """
-    model = RobertaForMaskedLM.from_pretrained(
+    model = (
+        transformers.RobertaForMaskedLM.from_pretrained(
         model_name
+        )
     )
     model.eval()
 
