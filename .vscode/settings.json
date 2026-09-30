@@ -1,3 +1,7 @@
 {
     "editor.inlineSuggest.enabled": false
+    "editor.suggest.preview": false,
+    "[python]": {
+        "editor.acceptSuggestionOnCommitCharacter": false
+    }
 }
