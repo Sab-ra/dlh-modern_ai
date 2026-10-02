@@ -7,7 +7,7 @@ as in-line suggestions! Got ya bastard!
 import transformers
 
 
-def create_text_genrator(
+def create_text_generator(
         model_name,
         prompt,
         max_new_tokens,
