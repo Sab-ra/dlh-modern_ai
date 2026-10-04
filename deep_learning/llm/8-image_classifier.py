@@ -11,7 +11,7 @@ def image_classifier(model):
     The pipeline loads the pretrained vision model,
     prepares each photo, and returns the most likely
     labels with scores.
-    Args: 
+    Args:
         model (str): Name of the pretrained model to invite,
             for example 'google/vit-base-patch16-224'.
     Returns:
