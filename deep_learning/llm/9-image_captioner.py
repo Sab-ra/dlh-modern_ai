@@ -2,9 +2,8 @@
 """
 Ask a model to write one sentence about a photo.
 """
-from deep_learning.transfer_learning.borrow_brain import inputs
 import transformers
-from PIL import Image
+import PIL
 
 
 def image_captioner(
@@ -28,7 +27,7 @@ def image_captioner(
         model
     )
 
-    image = Image.open(image_path). convert('RGB')
+    image = PIL.Image.open(image_path). convert('RGB')
     inputs = processor(
         images=image, return_tensors='pt'
     )
