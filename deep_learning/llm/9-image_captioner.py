@@ -33,12 +33,12 @@ def image_captioner(
     )
 
     output = caption_model.generate(
-        pixel_values = inputs['pixel_values'],
+        pixel_values=inputs['pixel_values'],
         max_new_tokens=max_new_tokens
     )
     caption = processor.decode(
         output[0],
-        skip_special_tokens = True
+        skip_special_tokens=True
     )
 
     return caption
