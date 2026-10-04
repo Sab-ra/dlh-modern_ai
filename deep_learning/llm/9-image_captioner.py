@@ -8,7 +8,7 @@ import PIL
 
 def image_captioner(
     model,
-    image_paht,
+    image_path,
     max_new_tokens
 ):
     """
