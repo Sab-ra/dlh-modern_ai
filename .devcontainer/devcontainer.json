@@ -1,33 +1,31 @@
 {
-  "name": "Machine Learning",
-
-  "build": {
-    "dockerfile": "Dockerfile",
-    "context": ".."
-  },
+  "name": "ML study (CPU)",
+  "build": { "dockerfile": "Dockerfile", "context": ".." },
 
   "workspaceFolder": "/workspace",
-
-  "workspaceMount":
-    "source=${localWorkspaceFolder},target=/workspace,type=bind",
-
+  "workspaceMount": "source=${localWorkspaceFolder},target=/workspace,type=bind",
   "remoteUser": "vscode",
+
+  // Keep downloaded models (Hugging Face, NLTK) across rebuilds.
+  "mounts": [
+    "source=ml-study-cache,target=/home/vscode/.cache,type=volume",
+    "source=ml-study-nltk,target=/home/vscode/nltk_data,type=volume"
+  ],
+
+  "postCreateCommand": "bash .devcontainer/post_create.sh",
 
   "customizations": {
     "vscode": {
       "extensions": [
         "ms-python.python",
-        "ms-python.pylance",
         "ms-toolsai.jupyter",
-        "ms-toolsai.jupyter-renderers",
-        "ms-python.black-formatter",
-        "charliermarsh.ruff",
-        "shd101wyy.markdown-preview-enhanced",
-        "ms-azuretools.vscode-docker"
-      ]
+        "charliermarsh.ruff"
+      ],
+      "settings": {
+        "python.defaultInterpreterPath": "/usr/local/bin/python",
+        "files.eol": "\n",
+        "[python]": { "editor.defaultFormatter": "charliermarsh.ruff" }
+      }
     }
-  },
-
-  "postCreateCommand":
-    "python -m ipykernel install --user"
+  }
 }
