@@ -4,6 +4,31 @@ One container with Python 3.12, Jupyter, scikit-learn, LightGBM, XGBoost,
 TensorFlow/Keras, PyTorch, Hugging Face, NLTK and OpenCV. No GPU needed.
 Works on Linux (x86_64), macOS Apple Silicon and Windows (Docker Desktop + WSL2).
 
+## How it works
+
+```mermaid
+flowchart TD
+    Dev["Developer"] --> VSCode["VS Code"]
+    VSCode --> DC["Dev Containers extension"]
+    DC -->|reads| DJ[".devcontainer/devcontainer.json"]
+    DJ -->|build| DF[".devcontainer/Dockerfile"]
+    DF --> Base["python:3.12-slim + git, libgomp1"]
+    DF --> Torch["torch + torchvision (CPU index)"]
+    DF --> Req["requirements.txt: TF, sklearn, HF, NLTK..."]
+    DC --> Docker["Docker Engine / Desktop"]
+    Docker -->|image| Container["Dev Container (user: vscode)"]
+    Repo["Git repo on host"] -->|bind mount| WS["/workspace"]
+    WS --> Container
+    V1[("ml-study-cache: ~/.cache (HF models)")] --> Container
+    V2[("ml-study-nltk: ~/nltk_data")] --> Container
+    Container -->|once after create| PC["post_create.sh"]
+    PC --> NB["nbstripout git filter"]
+    PC --> K["Jupyter kernel ml-study"]
+    PC --> NL["NLTK data download"]
+    VSCode <-->|attaches| Container
+    Container --> Ext["Extensions: Python, Jupyter, Ruff"]
+```
+
 ## Setup
 1. Install Docker Desktop (Windows/macOS) or Docker Engine (Linux), and start it.
 2. Install VS Code and the **Dev Containers** extension.
