@@ -9,6 +9,7 @@ venv/
 
 # Jupyter (notebooks ARE committed; outputs stripped by nbstripout)
 .ipynb_checkpoints/
+*.ipynb
 
 # Tests / linters
 .pytest_cache/
