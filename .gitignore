@@ -1,107 +1,61 @@
-# =========================
 # Python
-# =========================
 __pycache__/
 *.py[cod]
-*$py.class
-
-# Build artifacts
+*.egg-info/
 build/
 dist/
-*.egg-info/
-.eggs/
-
-# =========================
-# Virtual environments
-# =========================
-venv/
 .venv/
-env/
+venv/
 
-# =========================
-# Jupyter
-# =========================
+# Jupyter (notebooks ARE committed; outputs stripped by nbstripout)
 .ipynb_checkpoints/
 *.ipynb
 
-# Jupyter runtime files
-.jupyter/
-
-# =========================
-# Testing / Coverage
-# =========================
+# Tests / linters
 .pytest_cache/
-.coverage
-coverage.xml
-htmlcov/
-
-# =========================
-# Linters / Type checkers
-# =========================
 .ruff_cache/
 .mypy_cache/
+.coverage
+htmlcov/
 
-# =========================
-# IDEs
-# =========================
-.vscode/*
-!.vscode/extensions.json
-!.vscode/settings.json
-
-.idea/
-
-# =========================
-# OS files
-# =========================
-.DS_Store
-.AppleDouble
-Thumbs.db
-
-# =========================
-# Environment / Secrets
-# =========================
+# Secrets
 .env
-*.env
+.env.*
+!.env.example
 
-# =========================
-# Logs
-# =========================
-*.log
-*/logs/
-
-# =========================
-# ML / Data Science
-# =========================
+# Data (keep small samples by force-adding: git add -f)
+data/
+datasets/
+*.csv
+*.parquet
 *.npy
 *.npz
-*.h5
-*.hdf5
-*.pkl
-*.joblib
+*.zip
+*.tar.gz
 
-# Datasets
-datasets/
-data/
-data_analysis/intro_to_nlp/SMSSpamCollection
-
-# Or use project-specific paths instead:
-# pipeline/datasets/*.csv
-
-# =========================
-# Docker
-# =========================
-*.pid
-
-# =========================
-# Temporary files
-# =========================
-tmp/
-temp/
-
-# ==
-# Bulky model pieces
-# ==
+# Models / weights / training logs
 *.h5
 *.keras
-*.weights.h5
-`
+*.pkl
+*.joblib
+*.pt
+*.pth
+*.onnx
+*.ckpt
+*.safetensors
+runs/
+logs/
+**/logs/
+mlruns/
+wandb/
+*.tfevents.*
+
+# Editors / OS
+.vscode/*
+!.vscode/settings.json
+!.vscode/extensions.json
+.idea/
+.DS_Store
+Thumbs.db
+desktop.ini
+*.swp

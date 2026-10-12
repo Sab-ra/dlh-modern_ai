@@ -1,0 +1,20 @@
+# Normalize line endings (Windows hosts): LF in the repo and working tree.
+* text=auto eol=lf
+*.sh text eol=lf
+Dockerfile text eol=lf
+
+# Notebooks: commit without outputs/execution counts.
+*.ipynb filter=nbstripout
+*.ipynb diff=ipynb
+
+# Binary files
+*.png binary
+*.jpg binary
+*.jpeg binary
+*.gif binary
+*.pdf binary
+*.keras binary
+*.h5 binary
+*.pt binary
+*.pth binary
+*.onnx binary

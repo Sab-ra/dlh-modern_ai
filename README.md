@@ -1,178 +1,62 @@
-# dlh_modern_ai
+# Dev Container for ML study (CPU-only)
 
-**Machine Learning Containerised Poject**
+One container with Python 3.12, Jupyter, scikit-learn, LightGBM, XGBoost,
+TensorFlow/Keras, PyTorch, Hugging Face, NLTK and OpenCV. No GPU needed.
+Works on Linux (x86_64), macOS Apple Silicon and Windows (Docker Desktop + WSL2).
 
-## First Start Guide
-
-### Prerequisites
-
-- Docker Desktop (Windows/macOS) or Docker Engine (Linux)
-- Visual Studio Code
-- Dev Containers extension
-
-### Opening the Project
-
-1. Clone the repository:
-
-```bash
-git clone <repository-url>
-cd <repository>
-```
-
-2. Open the folder in VS Code.
-
-3. When prompted, select:
-
-```text
-Reopen in Container
-```
-
-or use:
-
-```text
-⌘⇧P (Ctrl+Shift+P)
-Dev Containers: Reopen in Container
-```
-
-4. Wait for the initial image build.
-
-The first build may take several minutes because Python packages must be downloaded and installed.
-
-### Verifying the Environment
-
-Open a terminal inside the container and run:
-
-```bash
-python --version
-pytest --version
-pycodestyle --version
-```
-
-Expected Python version:
-
-```text
-Python 3.11.x
-```
-
-### Working with Jupyter Notebooks
-
-Create a notebook:
-
-```text
-File → New File → Jupyter Notebook
-```
-
-or create a file ending in:
-
-```text
-.ipynb
-```
-
-Verify the kernel with:
-
-```python
-import numpy as np
-import pandas as pd
-
-print(np.__version__)
-print(pd.__version__)
-```
-
-### Rebuilding the Container
-
-When `requirements.txt`, `Dockerfile`, or `devcontainer.json` changes:
-
-```text
-⌘⇧P (Ctrl+Shift+P)
-Dev Containers: Rebuild Container
-```
-
-### Notes
-
-- The development environment runs inside Docker.
-- Source code remains on the host machine.
-- The setup works on macOS, Linux, and Windows.
-- Python packages are version-pinned for reproducibility.
-- Jupyter, pytest, pycodestyle, ruff, and black are preconfigured.
-
-## .gitignore
-
-## Dev Container Environment
-
-### Components of Dev Container Interaction
+## How it works
 
 ```mermaid
 flowchart TD
-
-    Dev[Developer]
-    VSCode[VS Code]
-    DC[Dev Container Extension]
-    Docker[Docker Engine]
-
-    Repo[Git Repository]
-    DevContainer[.devcontainer/devcontainer.json]
-    Dockerfile[.devcontainer/Dockerfile]
-    Requirements[requirements.txt]
-
-    Container[Running Dev Container]
-
-    Extensions[VS Code Extensions]
-    Python[Python 3.11]
-    Jupyter[Jupyter Notebook]
-    Tools[pytest · pycodestyle · ruff · black]
-
-    Dev --> VSCode
-    VSCode --> DC
-    DC --> Docker
-
-    Repo --> DevContainer
-    Repo --> Dockerfile
-    Repo --> Requirements
-
-    DevContainer --> Dockerfile
-    Dockerfile --> Requirements
-
-    Docker --> Container
-
-    Container --> Python
-    Container --> Jupyter
-    Container --> Tools
-    Container --> Extensions
-
-    VSCode <--> Container
+    Dev["Developer"] --> VSCode["VS Code"]
+    VSCode --> DC["Dev Containers extension"]
+    DC -->|reads| DJ[".devcontainer/devcontainer.json"]
+    DJ -->|build| DF[".devcontainer/Dockerfile"]
+    DF --> Base["python:3.12-slim + git, libgomp1"]
+    DF --> Torch["torch + torchvision (CPU index)"]
+    DF --> Req["requirements.txt: TF, sklearn, HF, NLTK..."]
+    DC --> Docker["Docker Engine / Desktop"]
+    Docker -->|image| Container["Dev Container (user: vscode)"]
+    Repo["Git repo on host"] -->|bind mount| WS["/workspace"]
+    WS --> Container
+    V1[("ml-study-cache: ~/.cache (HF models)")] --> Container
+    V2[("ml-study-nltk: ~/nltk_data")] --> Container
+    Container -->|once after create| PC["post_create.sh"]
+    PC --> NB["nbstripout git filter"]
+    PC --> K["Jupyter kernel ml-study"]
+    PC --> NL["NLTK data download"]
+    VSCode <-->|attaches| Container
+    Container --> Ext["Extensions: Python, Jupyter, Ruff"]
 ```
 
-### requirements.txt
+## Setup
+1. Install Docker Desktop (Windows/macOS) or Docker Engine (Linux), and start it.
+2. Install VS Code and the **Dev Containers** extension.
+3. Clone this repo:
+   `git clone https://github.com/digitalPatch/dev_container_for_ML_by_sabra.git`
+4. Open the folder in VS Code.
+5. Click **Reopen in Container** (or press F1 → "Dev Containers: Reopen in Container").
+6. Wait for the first build (10–20 min, ~6 GB). Later rebuilds reuse the cache.
+7. Open a notebook and pick the kernel **Python 3.12 (ml-study)**.
 
-List of Python libraries and versions that should be installed inside the container.
+## Windows
+1. Enable WSL2 in Docker Desktop (Settings → General → "Use the WSL 2 based engine").
+2. Clone inside WSL for much faster file access: open Ubuntu (WSL), run the
+   `git clone` from step 3, then run `code .` in that folder.
+3. If you clone from Windows instead, use **Git Bash** and run
+   `git config --global core.autocrlf input` before cloning.
+   `.gitattributes` already forces LF, so `post_create.sh` still runs.
 
-`requirements.txt` gives you:
+## Notebooks
+1. Commit notebooks as usual (`git add`, `git commit`).
+2. Rely on nbstripout: it is set up automatically in the container and strips
+   outputs on commit. Your local file keeps its outputs.
+3. Commit only from the container terminal (the filter lives there).
 
-- [x] Curriculum compliance
-- [x] Jupyter notebooks
-- [x] Unit testing (`pytest`)
-- [x] Style checks (`pycodestyle`)
-- [x] Fast linting (`ruff`)
-- [x] Auto-formatting (`black`)
+## Data and models
+1. Put datasets in `data/`; they are git-ignored.
+2. Force-add a small sample if needed: `git add -f data/sample.csv`.
 
-### .devcontainer/devcontainer.json
-
-Defines the development experience:
-
-- Container build configuration
-- Workspace mounting
-- VS Code extensions
-- VS Code settings
-- Default user and environment customization
-
-### .devcontainer/Dockerfile
-
-Defines the container image:
-
-- Python version
-- Operating system packages
-- Project dependencies
-- User configuration
-- Runtime environment
-
-Together, `devcontainer.json`, `Dockerfile`, and `requirements.txt` create a reproducible machine-learning environment that works consistently on macOS, Linux, and Windows.
+## Update packages
+1. Edit `requirements.txt`.
+2. Run F1 → "Dev Containers: Rebuild Container".
