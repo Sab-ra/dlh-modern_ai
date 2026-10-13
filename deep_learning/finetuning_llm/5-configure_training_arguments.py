@@ -18,7 +18,7 @@ def configure_training_args(
     """
     Return Training Arguments for fine-tuning.
     """
-    transformers.TrainingArguments(
+    return transformers.TrainingArguments(
         output_dir=output_dir,
         num_train_epochs=epochs,
         per_device_train_batch_size=per_device_train_batch_size,
