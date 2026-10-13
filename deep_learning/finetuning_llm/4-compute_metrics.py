@@ -3,11 +3,7 @@
 Judges score the scribe's guesses.
 """
 import numpy as np
-from sklearn.metrics import (
-    accuracy_score,
-    precision_recall_fscore_support
-)
-
+import sklearn.metrics
 
 def compute_metrics(predictions):
     """
@@ -18,7 +14,7 @@ def compute_metrics(predictions):
     labels = predictions.label_ids
     preds = np.argmax(logits, axis=1)
     precision, recall, f1, _ = (
-        precision_recall_fscore_support(
+        sklearn.metrics.precision_recall_fscore_support(
             labels=labels,
             preds=preds,
             average='weighted'
@@ -26,7 +22,7 @@ def compute_metrics(predictions):
     )
 
     return {
-        'accuracy': accuracy_score(labels, preds),
+        'accuracy': sklearn.metrics.accuracy_score(labels, preds),
         'precision': precision,
         'recall': recall,
         'f1': f1
