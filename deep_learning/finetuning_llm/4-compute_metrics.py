@@ -15,8 +15,8 @@ def compute_metrics(predictions):
     preds = np.argmax(logits, axis=1)
     precision, recall, f1, _ = (
         sklearn.metrics.precision_recall_fscore_support(
-            labels=labels,
-            preds=preds,
+            y_true=labels,
+            y_pred=preds,
             average='weighted'
         )
     )
