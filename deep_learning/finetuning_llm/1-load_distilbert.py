@@ -20,7 +20,7 @@ def load_distilbert(
     )
     model = (
         transformers.AutoModelForSequenceClassification.from_pretrained(
-            model_name=model_name,
+            model_name,
             num_labels=num_classes,
             id2label=id2label,
             label2id=label2id
