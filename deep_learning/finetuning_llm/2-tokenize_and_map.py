@@ -32,8 +32,8 @@ def tokenize_and_map(
 
     tokenized = dataset.map(grab_handful, batched=batched)
 
-    tok_train   = tokenized['train']
-    tok_val     = tokenized['validation']
-    tok_test    = tokenized['test']
+    tok_train = tokenized['train']
+    tok_val = tokenized['validation']
+    tok_test = tokenized['test']
 
     return tok_train, tok_val, tok_test
