@@ -279,7 +279,6 @@ DistilBertConfig {
   "vocab_size": 30522
 }
 
-
 Total parameters: 66,958,086
 Trainable parameters: 66,958,086
 ```
