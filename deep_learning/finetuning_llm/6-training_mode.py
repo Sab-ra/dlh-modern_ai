@@ -1,6 +1,6 @@
 #!/usr/bin/env python3
 """
-Trina the Trainer runs school for the scribe.
+Trina the Trainer runs school for the Scribe.
 """
 import transformers
 
@@ -37,6 +37,5 @@ def train_model(
     tokenizer.save_pretrained(
         save_directory=model_save_name
     )
-    trainer = trina
 
-    return trainer, train_results, test_results
+    return trina, train_results, test_results
