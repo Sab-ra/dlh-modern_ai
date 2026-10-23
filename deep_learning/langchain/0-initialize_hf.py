@@ -3,7 +3,7 @@
 Give voice to a little silver fox
 named Liora.
 """
-from langchain_huggingface import HuggingFacePipeline
+from langchain_community import llms
 
 
 def initialize_hf_llm(
@@ -13,7 +13,7 @@ def initialize_hf_llm(
     Set up a HggF text-to-text model
     in LangChain
     """
-    llm = HuggingFacePipeline.from_model_id(
+    llm = llms.HuggingFacePipeline.from_model_id(
         model_id=model_name,
         task='text2text-generation',
         pipeline_kwargs={
