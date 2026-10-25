@@ -3,7 +3,7 @@
 Get Mistral AI chat ready for use,
 or Liora's other type of voice.
 """
-from langchain_mistralai import ChatMistralAI
+import langchain_mistralai
 
 
 def load_mistral(model_name, temperature):
@@ -11,7 +11,7 @@ def load_mistral(model_name, temperature):
     Fetch mistral chat by name, with predefined
     commitment to accuracy (temperature).
     """
-    llm = ChatMistralAI(
+    llm = langchain_mistralai.ChatMistralAI(
         model_name=model_name,
         temperature=temperature
     )
