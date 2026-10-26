@@ -1,0 +1,34 @@
+{
+  "data": {
+    "train": 409,
+    "validation": 51,
+    "test": 52,
+    "vocabulary": 46
+  },
+  "models": [
+    {
+      "model": "RNN",
+      "word_accuracy": 1.0,
+      "sentence_exact_match": 1.0,
+      "eos_rate": 1.0,
+      "word_macro_f1": 1.0,
+      "teacher_forced_token_accuracy": 1.0,
+      "parameters": 40878,
+      "training_seconds": 5.0246249209999405,
+      "best_epoch": 60,
+      "best_validation_loss": 0.0011674020206555724
+    },
+    {
+      "model": "LSTM",
+      "word_accuracy": 1.0,
+      "sentence_exact_match": 1.0,
+      "eos_rate": 1.0,
+      "word_macro_f1": 1.0,
+      "teacher_forced_token_accuracy": 1.0,
+      "parameters": 103086,
+      "training_seconds": 7.1423214510000435,
+      "best_epoch": 60,
+      "best_validation_loss": 0.003493820782750845
+    }
+  ]
+}
