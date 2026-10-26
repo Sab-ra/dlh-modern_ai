@@ -1,5 +1,5 @@
 # Python 3.12, CPU-only. torch/torchvision are installed first from the
-# PyTorch CPU index (see .devcontainer/Dockerfile), so they are not listed here.
+# PyTorch CPU index (see .devcontainer/Dockerfile), so they're not listed.
 
 # --- Core data science ---
 numpy==2.5.4
@@ -45,6 +45,7 @@ langchain-community==0.4.2
 langchain-experimental==0.4.2
 langchain-text-splitters==1.1.3
 langchain-mistralai==1.1.6
+langchain-ollama==1.1.0   # ChatOllama; server is in the Dockerfile
 langchain-huggingface==1.2.3
 faiss-cpu==1.15.1
 wikipedia==1.4.0
