@@ -3,16 +3,24 @@
   "build": { "dockerfile": "Dockerfile", "context": ".." },
 
   "workspaceFolder": "/workspace",
-  "workspaceMount": "source=${localWorkspaceFolder},target=/workspace,type=bind",
+  "workspaceMount":
+    "source=${localWorkspaceFolder},target=/workspace,type=bind",
   "remoteUser": "vscode",
 
-  // Keep downloaded models (Hugging Face, NLTK) across rebuilds.
+  // Keep downloaded models (Hugging Face, NLTK, Ollama) across rebuilds.
   "mounts": [
     "source=ml-study-cache,target=/home/vscode/.cache,type=volume",
     "source=ml-study-nltk,target=/home/vscode/nltk_data,type=volume"
   ],
 
   "postCreateCommand": "bash .devcontainer/post_create.sh",
+  // Start the Ollama server every time the container starts.
+  "postStartCommand": "bash .devcontainer/start_ollama.sh",
+
+  // Ollama API (used from inside the container; no pop-up on forward).
+  "portsAttributes": {
+    "11434": { "label": "ollama", "onAutoForward": "silent" }
+  },
 
   "customizations": {
     "vscode": {
