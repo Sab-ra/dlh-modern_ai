@@ -8,4 +8,4 @@ def get_response(llm, prompt):
     """
     Returns response of llm.
     """
-    return llm.invoke(imput=prompt)
+    return llm.invoke(input=prompt)
