@@ -9,7 +9,7 @@ import langchain_mistralai
 def load_mistral(model_name, temperature):
     """
     Fetch mistral chat by name, with predefined
-    commitment to accuracy (temperature).
+    commitment to predictability (temperature).
     """
     llm = langchain_mistralai.ChatMistralAI(
         model_name=model_name,
