@@ -21,8 +21,8 @@ def setup_message_sequence(
     if human_msgs is None:
         human_msgs = []
         prompt = [
-        messages.SystemMessage(system_msg)
-    ]
+            messages.SystemMessage(system_msg)
+        ]
     for m in human_msgs:
         prompt.append(
             messages.HumanMessage(m)
