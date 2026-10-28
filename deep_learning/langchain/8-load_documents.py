@@ -3,10 +3,7 @@
 Carry every help article into Liora's
 library, one Document per file.
 """
-from langchain_community.document_loaders import(
-    DirectoryLoader,
-    TextLoader
-)
+from langchain_community import document_loaders
 
 
 def load_documents(folder_path, file_pattern):
@@ -15,10 +12,10 @@ def load_documents(folder_path, file_pattern):
     file_pattern and read each one with TextLoader
     into a Document.
     """
-    loader = DirectoryLoader(
+    loader = document_loaders.DirectoryLoader(
         path=folder_path,
         glob=file_pattern,
-        loader_cls=TextLoader
+        loader_cls=document_loaders.TextLoader
     )
     docs = loader.load()
 
