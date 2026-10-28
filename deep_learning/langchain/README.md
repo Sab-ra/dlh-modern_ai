@@ -821,6 +821,17 @@ Although some of these tracks aren’t technical in nature, they are still consi
 
 ## 10-create_embeddings.py
 
+```mermaid
+flowchart TD
+    C["🗂️ index card from story 9<br/>text"] --> M["🧭 HuggingFaceEmbeddings<br/>all-MiniLM-L6-v2"]
+    M --> V["🔢 vector: 384 numbers<br/>the card's address on the meaning map"]
+    Q["❓ a question"] --> M
+    M --> QV["🔢 question vector"]
+    V --> N["🗺️ close addresses = similar meaning"]
+    QV --> N
+    N -.->|story 11| F["🗄️ FAISS vector store"]
+```
+
 ### 10. (RAG) Load Embedding Model
 
 Write a function `create_embeddings(model_name)` that loads a HuggingFace embedding model using LangChain, which can be used to generate vector representations of documents for tasks like similarity search or retrieval.
