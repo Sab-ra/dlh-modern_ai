@@ -17,7 +17,7 @@ def load_agent_with_toolkit(
     from the llm and prompt, and wrap it in a verbose
     AgentExecutor that runs the think-call-read loop.
     """
-    tools = load_tools(
+    tools = load_tools.load_tools(
         tool_names=toolkit_names
     )
     agent = agents.create_tool_calling_agent(
