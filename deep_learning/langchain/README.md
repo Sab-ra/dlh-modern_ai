@@ -1101,6 +1101,25 @@ Unlike Foundations, the majority of the Specialization projects are longer and g
 
 ## 12-document_chain.py
 
+```mermaid
+flowchart TD
+    Q["❓ input: Can you tell me more about the PLDs?"] --> R["🐕 retriever from story 11"]
+    R --> D["📄 3 retrieved cards"]
+    D -->|stuffed into one block| CTX["🧩 {context}"]
+
+    subgraph prompt["📜 ChatPromptTemplate: order matters"]
+        S["1️⃣ system: answer from {context}"]
+        H["2️⃣ MessagesPlaceholder chat_history<br/>earlier turns"]
+        U["3️⃣ human: {input}"]
+        S --> H --> U
+    end
+
+    CTX --> S
+    Q --> U
+    prompt --> L["🦊 llm"]
+    L --> A["✅ one-sentence answer, plain text"]
+```
+
 ### 12. (RAG) Get Answer Using Document Chain
 
 Write a function `document_answer_chain(llm, system_message, human_message)` that combines multiple documents into a coherent context and generates answers from them, while leveraging prior conversation history.
