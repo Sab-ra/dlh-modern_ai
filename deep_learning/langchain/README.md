@@ -694,6 +694,15 @@ dtype: object
 
 ## 8-load_documents.py
 
+```mermaid
+flowchart TD
+    F["📁 ZendeskArticles folder"] --> DL["🚚 DirectoryLoader<br/>walks the folder, finds **/*.md"]
+    DL -->|for each file| TL["📖 TextLoader<br/>reads one file"]
+    TL --> D["📄 Document<br/>page_content + metadata source"]
+    D --> L["📚 docs: list of 91 Documents"]
+    L -.->|story 9| C["✂️ chunks"]
+```
+
 ### 8. (RAG) Document Loader
 
 Write a function `load_documents(folder_path, file_pattern)` that loads documents from a folder and returns them as a list using LangChain.
