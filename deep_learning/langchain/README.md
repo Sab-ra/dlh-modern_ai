@@ -303,6 +303,28 @@ $ ./5-main.py
 
 ## 6-tool_agent.py
 
+```mermaid
+flowchart TD
+    subgraph build["🛠️ You build it once (6-tool_agent.py)"]
+        T["🧰 load_tools<br/>the toolbox: Wikipedia"]
+        P["📜 prompt from task 5<br/>system + human + 📒 notepad"]
+        L["🧠 llm from task 1<br/>Mistral"]
+        A["🦊 create_tool_calling_agent<br/>Liora's brain = llm + tools + prompt"]
+        E["🔁 AgentExecutor<br/>runs the loop, verbose=True"]
+        T --> A
+        P --> A
+        L --> A
+        A --> E
+        T --> E
+    end
+
+    Q["❓ Who is Albert Einstein?"] --> E
+    E -->|asks| B{"🦊 Do I need a tool?"}
+    B -->|yes| W["📚 Wikipedia search<br/>'Albert Einstein'"]
+    W -->|writes the result in 📒 notepad| B
+    B -->|no, I know enough| R["✅ response['output']"]
+```
+
 ### 6. Multi-Tool Agent
 
 Write a function `load_agent_with_toolkit(llm, toolkit_names, prompt)` that sets up a LangChain agent executor capable of using multiple tools to answer user queries.
