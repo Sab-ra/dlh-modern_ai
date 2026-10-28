@@ -3,7 +3,8 @@
 Give Liora a spreadsheet and a Python calculator
 so she can count customers instead of guesing.
 """
-from langchain_experimental.agents.agent_toolkits import create_pandas_dataframe_agent
+from langchain_experimental.agents.agent_toolkits import (
+    create_pandas_dataframe_agent)
 
 
 def create_dataframe_agent(llm, df):
