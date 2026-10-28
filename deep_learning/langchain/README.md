@@ -889,6 +889,17 @@ Although some of these tracks aren’t technical in nature, they are still consi
 
 ## 11-create_faiss_vectorstore.py
 
+```mermaid
+flowchart TD
+    C["🗂️ 149 index cards from story 9"] --> F["🗄️ FAISS.from_documents"]
+    E["🧭 embedding model from story 10"] --> F
+    F -->|stores each card with its 384-number address| VS["🗄️ vectorstore<br/>the filing cabinet"]
+    VS -->|as_retriever, k=3| R["🐕 retriever<br/>the fetching dog"]
+    Q["❓ When are PLDs?"] --> R
+    R -->|brings back the 3 closest cards| A["📄 PeerLearningDays.md and 2 more"]
+    A -.->|story 12| L["🦊 Liora answers from the cards"]
+```
+
 ### 11. (RAG) Create Vector Store
 
 Write a function `create_faiss_vectorstore(docs, embedding_model, k, search_type="similarity")` that builds a FAISS vector store from a list of documents using LangChain. Vector stores enable fast similarity-based retrieval using document embeddings and are commonly used for tasks like question answering or document search.
