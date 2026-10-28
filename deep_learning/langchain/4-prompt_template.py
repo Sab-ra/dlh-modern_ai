@@ -2,7 +2,7 @@
 """
 Give Liora a reusable script with blanks to fill in.
 """
-from langchain_core import prompts
+from langchain import prompts
 
 
 def create_prompt_template(
