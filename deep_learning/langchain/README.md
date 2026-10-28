@@ -1270,6 +1270,19 @@ To address this, in the next task we will implement a History-Aware Retriever, w
 
 ## 13-history_aware_retriever.py
 
+```mermaid
+flowchart TD
+    I["❓ input: Can you tell me more about them?"] --> B{"🧠 Is there any chat_history?"}
+    H["📝 chat_history<br/>human: What does PLD stand for?<br/>ai: Peer Learning Days"] --> B
+    B -->|no| R["🐕 retriever from story 11"]
+    B -->|yes| P["📜 prompt: chat_history, then human input"]
+    P --> L["🦊 llm rewrites the question"]
+    L --> SQ["🔎 search query: What are Peer Learning Days?"]
+    SQ --> R
+    R --> D["📄 3 cards about PLDs"]
+    D -.->|story 14| C["🔗 conversational chain"]
+```
+
 ### 13. (RAG) History-Aware Retriever
 
 Write a function `build_history_aware_retriever(llm, retriever, human_message)` that generates a search query based on the conversation history and the user’s current input to retrieve the most relevant documents.
