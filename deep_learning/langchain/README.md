@@ -756,6 +756,16 @@ The overall average must be 80% to progress in the program; failure to achieve t
 
 ## 9-chunking.py
 
+```mermaid
+flowchart TD
+    D["📚 docs: 91 articles from story 8"] --> S["✂️ RecursiveCharacterTextSplitter<br/>chunk_size=1000, chunk_overlap=200"]
+    S --> T{"Too big?"}
+    T -->|cut at paragraphs, then lines, then spaces| T
+    T -->|small enough| C["🗂️ split_docs: 149 index cards"]
+    C --> M["🏷️ each card keeps its metadata source"]
+    M -.->|story 10| E["🔢 embeddings"]
+```
+
 ### 9. (RAG) Chunking
 
 Write a function `split_into_chunks(docs, chunk_size, chunk_overlap)` that splits a list of documents into smaller, manageable chunks.
