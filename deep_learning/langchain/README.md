@@ -410,6 +410,24 @@ Einstein's legacy endures through his scientific contributions, his advocacy for
 
 ## 7-dataframe_agent.py
 
+```mermaid
+flowchart TD
+    subgraph build["🛠️ One call builds it all (7-dataframe_agent.py)"]
+        L["🧠 llm from task 1"]
+        D["📊 df, the Telco table"]
+        F["🏭 create_pandas_dataframe_agent"]
+        L --> F
+        D --> F
+        F --> E["🔁 AgentExecutor<br/>with a 🧮 Python calculator inside"]
+    end
+
+    Q["❓ How many customers churned?"] --> E
+    E --> B{"🦊 What pandas line<br/>do I need?"}
+    B -->|writes code| C["🧮 df['Churn'].value_counts()['Yes']"]
+    C -->|1869| B
+    B -->|I know enough| R["✅ response['output']: 1869"]
+```
+
 ### 7. Pandas DataFrame Agent
 
 Write a function `create_dataframe_agent(llm, df)` that sets up a Pandas DataFrame Agent using a LangChain LLM.
