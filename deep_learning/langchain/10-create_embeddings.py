@@ -3,7 +3,7 @@
 Give liora a translator that turns every card
 into an address on a map of meaning.
 """
-from langchain_huggingface import embeddings
+from langchain_huggingface import HuggingFaceEmbeddings
 
 
 def create_embeddings(model_name):
@@ -11,7 +11,7 @@ def create_embeddings(model_name):
     Load a HuggingFace sentence-embedding model
     that turns text into vectors.
     """
-    embedding_model = embeddings.HuggingFaceEmbeddings(
+    embedding_model = HuggingFaceEmbeddings(
         model_name=model_name
     )
 
