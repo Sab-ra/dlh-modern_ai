@@ -1552,6 +1552,18 @@ Answer: Peer Learning Days (PLDs) are mandatory, on-site collaborative learning 
 
 ## 15-session_aware_chat.py
 
+```mermaid
+flowchart TD
+    U["🙋 user types: When do they start?<br/>session_id holbie_1"] --> W["🎒 RunnableWithMessageHistory"]
+    W -->|asks for the diary of holbie_1| G["📒 get_session_history"]
+    G -->|past turns| W
+    W -->|input + chat_history| QA["🔗 qa_chain from story 14"]
+    QA -->|answer| W
+    W -->|writes question + answer into the diary| G
+    W --> B["🦊 Bot: PLDs start during the first 6 weeks..."]
+    B -.->|next question| U
+```
+
 ### 15. (RAG) Session-Aware Q&A Chatbot
 
 Write a function `create_session_aware_chat(retrieval_chain, get_session_history, input_key, history_key, output_key)` that wraps a conversational retrieval chain to support session-aware chat histories. This allows each user query to leverage prior conversation for accurate document retrieval and answer generation.
