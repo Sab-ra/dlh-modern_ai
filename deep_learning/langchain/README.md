@@ -1445,6 +1445,20 @@ No laptops, tablets, or screens are allowed until all tasks have been whiteboard
 
 ## 14-conversational_retrieval_chain.py
 
+```mermaid
+flowchart TD
+    IN["📨 input + chat_history"] --> HR["🐕🧠 history-aware retriever<br/>story 13: rewrite, then fetch"]
+    HR -->|adds key context| D["📄 3 cards about PLDs"]
+    IN --> DC["📖🦊 document chain<br/>story 12: stuff cards, answer"]
+    D --> DC
+    DC -->|adds key answer| OUT["✅ result dict<br/>input, chat_history, context, answer"]
+
+    subgraph qa["🔗 create_retrieval_chain = qa_chain"]
+        HR
+        DC
+    end
+```
+
 ### 14. (RAG) Conversational Retrieval Chain
 
 Write a function `create_conversational_retrieval_chain(history_aware_retriever, document_chain)` that builds a retrieval chain capable of answering user queries by fetching relevant documents while incorporating prior conversation context.
