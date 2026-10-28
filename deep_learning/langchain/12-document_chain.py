@@ -16,13 +16,13 @@ def document_answer_chain(
     into {context} and asks the llm.
     """
     prompt_get_answer = (
-        prompts.ChatPromptTemplate.from_messages[
+        prompts.ChatPromptTemplate.from_messages([
             ("system", system_message),
             prompts.MessagesPlaceholder(
                 variable_name='chat_history'
             ),
             ("human", human_message)
-        ]
+        ])
     )
     qa_document_chain = combine_documents.create_stuff_documents_chain(
         llm=llm,
