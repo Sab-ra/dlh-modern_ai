@@ -3,7 +3,7 @@
 Let Liora read the fetched cards, remember the talk
 so far, and answer the new question from them.
 """
-from langchain import prompts
+from langchain_core import prompts
 from langchain.chains import combine_documents
 
 
