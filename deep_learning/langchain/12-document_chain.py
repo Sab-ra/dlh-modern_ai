@@ -4,9 +4,7 @@ Let Liora read the fetched cards, remember the talk
 so far, and answer the new question from them.
 """
 from langchain import prompts
-from langchain.chains.combine_documents import(
-    create_stuff_documents_chain
-)
+from langchain.chains import combine_documents
 
 
 def document_answer_chain(
@@ -26,7 +24,7 @@ def document_answer_chain(
             ("human", human_message)
         ]
     )
-    qa_document_chain = create_stuff_documents_chain(
+    qa_document_chain = combine_documents.create_stuff_documents_chain(
         llm=llm,
         prompt=prompt_get_answer
     )
